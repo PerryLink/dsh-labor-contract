@@ -1,0 +1,21 @@
+[
+  {
+    "path": "docs/assets/quickstart.png",
+    "kind": "quickstart",
+    "alt": "dsh-labor-contract quickstart terminal output",
+    "caption": "Real command: node samples/quickstart/run.mjs --check — a synthetic 36-month contract passes all nine clause checks, the 6-person CSV yields four issues, and the exported CSV matches its golden file. Rendered from the captured terminal output.",
+    "command": "node samples/quickstart/run.mjs --check",
+    "run_at": "2026-11-02T15:05:08Z",
+    "output_sha256": "10ef553e99e8ca3bdb82632321cce2b996132223f152253c9e6d6ea0361102e5",
+    "output_path": "samples/quickstart/expected/result.json",
+    "log": "docs/assets/quickstart.log",
+    "log_sha256": "9e4c04eb341f7b3118f81244075fe84e93f72313da8de1deb9fb4a60c8e4445d",
+    "image_sha256": "78e732acc898c855c0008f6196664ec54f3425a32cde832e1333d291707deaa1"
+  },
+  {
+    "path": "docs/assets/dsh-labor-contract-flow.svg",
+    "kind": "flow",
+    "alt": "dsh-labor-contract workflow diagram",
+    "caption": "Pipeline diagram: local contract text and employee CSV to clause/probation/expiry checks to a local CSV; schematic, not test evidence."
+  }
+]

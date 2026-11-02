@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="dsh-labor-contract">
+  <rect width="64" height="64" rx="14" fill="#0d1117"/>
+  <path d="M18 10h20l10 10v34H18z" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <path d="M38 10v10h10" fill="none" stroke="#58a6ff" stroke-width="2"/>
+  <path d="M25 26h16M25 33h16M25 40h9" stroke="#8b949e" stroke-width="2" stroke-linecap="round"/>
+  <path d="M34 45l4 4 8-10" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

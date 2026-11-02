@@ -1,0 +1,73 @@
+{
+  "run_id": "labor-1793632232618",
+  "scope": "LABOR-S1",
+  "status": "pass",
+  "counted": false,
+  "note": "synthetic contract and employee CSV only; clause/date checks, not legal advice; 0 real employees",
+  "metrics": [
+    {
+      "req_id": "LABOR-A01",
+      "metric": "nine required clauses present",
+      "threshold": "9/9",
+      "actual": "9/9",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A02",
+      "metric": "missing clauses detected",
+      "threshold": "9",
+      "actual": 9,
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A03",
+      "metric": "probation cap boundary",
+      "threshold": "ok/over/over",
+      "actual": "ok/over_limit/over_limit",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A04",
+      "metric": "80% probation-pay boundary",
+      "threshold": "ok/below_80",
+      "actual": "ok/below_80",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A05",
+      "metric": "6-person batch issues",
+      "threshold": "4",
+      "actual": "6rows/4issues",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A06",
+      "metric": "expiry window",
+      "threshold": "1expired/1expiring",
+      "actual": "1expired/1expiring",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A07",
+      "metric": "invalid date error",
+      "threshold": "E_LABOR_DATE_INVALID",
+      "actual": "E_LABOR_DATE_INVALID",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A08",
+      "metric": "export path safety",
+      "threshold": "E_LABOR_PATH_INVALID",
+      "actual": "E_LABOR_PATH_INVALID",
+      "pass": true
+    },
+    {
+      "req_id": "LABOR-A09",
+      "metric": "export sha256/bytes",
+      "threshold": "matches file",
+      "actual": "ok",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

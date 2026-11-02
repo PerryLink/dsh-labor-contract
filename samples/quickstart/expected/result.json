@@ -1,0 +1,182 @@
+{
+  "sample": {
+    "contract": "samples/quickstart/input/labor-contract.txt",
+    "employees": "samples/quickstart/input/employees.csv"
+  },
+  "as_of": "2026-11-02",
+  "check": {
+    "clauses": [
+      {
+        "key": "term",
+        "label_zh": "合同期限",
+        "status": "present",
+        "evidence": "本合同为固定期限劳动合同，自 2026 年 1 月 1 日起至 2028 年 12 月 31 日止",
+        "note_zh": ""
+      },
+      {
+        "key": "duties",
+        "label_zh": "工作内容",
+        "status": "present",
+        "evidence": "乙方的工作岗位为前端工程师，工作内容为负责产品前端开发与维护",
+        "note_zh": ""
+      },
+      {
+        "key": "location",
+        "label_zh": "工作地点",
+        "status": "present",
+        "evidence": "乙方的工作地点为杭州市西湖区文三路 100 号（合成地址）",
+        "note_zh": ""
+      },
+      {
+        "key": "hours",
+        "label_zh": "工时与休息休假",
+        "status": "present",
+        "evidence": "甲方实行标准工时制，乙方每日工作 8 小时，每周工作 5 天，依法享受法定节假日和年休假",
+        "note_zh": ""
+      },
+      {
+        "key": "pay",
+        "label_zh": "劳动报酬",
+        "status": "present",
+        "evidence": "乙方试用期工资为人民币 10800 元/月，转正后月工资为人民币 12000 元/月，甲方于每月 10 日前发放",
+        "note_zh": ""
+      },
+      {
+        "key": "insurance",
+        "label_zh": "社会保险",
+        "status": "present",
+        "evidence": "甲方依法为乙方缴纳养老保险、医疗保险、失业保险、工伤保险和生育保险",
+        "note_zh": ""
+      },
+      {
+        "key": "protection",
+        "label_zh": "劳动保护与劳动条件",
+        "status": "present",
+        "evidence": "第七条 劳动保护与劳动条件",
+        "note_zh": ""
+      },
+      {
+        "key": "termination",
+        "label_zh": "解除与终止",
+        "status": "present",
+        "evidence": "甲方依法解除或终止时按规定支付经济补偿",
+        "note_zh": ""
+      },
+      {
+        "key": "dispute",
+        "label_zh": "争议解决",
+        "status": "present",
+        "evidence": "协商不成的，向杭州市劳动人事争议仲裁委员会申请仲裁，对仲裁裁决不服的可以向人民法院提起诉讼",
+        "note_zh": ""
+      }
+    ],
+    "summary": {
+      "present": 9,
+      "attention": 0,
+      "missing": 0
+    },
+    "term": {
+      "type": "fixed",
+      "start": "2026-01-01",
+      "end": "2028-12-31",
+      "months": 36
+    },
+    "probation": {
+      "months": 3,
+      "limit_months": 6,
+      "term_months": 36,
+      "status": "ok",
+      "note_zh": "试用期 3 个月，未超过该合同期限的上限 6 个月。"
+    },
+    "probation_pay": {
+      "probation_salary_cents": 1080000,
+      "regular_salary_cents": 1200000,
+      "ratio_pct": 90,
+      "status": "ok",
+      "note_zh": "试用期工资为约定工资的 90.00%，不低于 80%；仍需确认不低于当地最低工资标准。"
+    },
+    "non_compete": {
+      "mentioned": true,
+      "compensation_mentioned": true,
+      "duration_months": 24,
+      "status": "present",
+      "hint_zh": "竞业限制需在限制期限内按月支付经济补偿；未约定补偿时，劳动者可主张按离职前十二个月平均工资的 30% 按月支付；竞业限制期限不得超过二年。"
+    },
+    "disclaimer_zh": "仅做条款覆盖、日期和比例的格式核对，不构成法律意见；具体合规请咨询执业律师或当地人力资源社会保障部门。"
+  },
+  "batch": {
+    "as_of": "2026-11-02",
+    "rows": 6,
+    "issues": [
+      {
+        "row": 3,
+        "employee": "李二（合成）",
+        "position": "会计",
+        "code": "PROBATION_OVER_LIMIT",
+        "detail_zh": "试用期 3 个月，超过该合同期限的上限 2 个月。"
+      },
+      {
+        "row": 4,
+        "employee": "王三（合成）",
+        "position": "销售",
+        "code": "CONTRACT_EXPIRED",
+        "detail_zh": "合同已于 2026-02-28 到期（247 天前），请确认是否续签或终止。"
+      },
+      {
+        "row": 5,
+        "employee": "赵四（合成）",
+        "position": "客服",
+        "code": "PROBATION_PAY_BELOW_80",
+        "detail_zh": "试用期工资 7999.00 元，为约定月工资 10000.00 元的 79.99%，低于 80% 下限。"
+      },
+      {
+        "row": 7,
+        "employee": "周六（合成）",
+        "position": "人事专员",
+        "code": "CONTRACT_EXPIRING",
+        "detail_zh": "合同将于 2027-01-15 到期（还剩 74 天），已进入 90 天续签提醒窗口。"
+      }
+    ],
+    "due": {
+      "expired": [
+        {
+          "row": 4,
+          "employee": "王三（合成）",
+          "position": "销售",
+          "contract_end": "2026-02-28",
+          "days_left": -247,
+          "state": "expired"
+        }
+      ],
+      "expiring": [
+        {
+          "row": 7,
+          "employee": "周六（合成）",
+          "position": "人事专员",
+          "contract_end": "2027-01-15",
+          "days_left": 74,
+          "state": "expiring"
+        }
+      ]
+    },
+    "summary": {
+      "rows": 6,
+      "issues": 4,
+      "by_code": {
+        "CONTRACT_EXPIRED": 1,
+        "CONTRACT_EXPIRING": 1,
+        "PROBATION_OVER_LIMIT": 1,
+        "PROBATION_PAY_BELOW_80": 1
+      },
+      "expired": 1,
+      "expiring": 1
+    }
+  },
+  "export": {
+    "path": "exports/labor-issues.csv",
+    "rows": 4,
+    "bytes": 566,
+    "sha256": "3fed842ff8876238843cb83a4dc3e0c73f20690a338300903ede1fc1b84955b7",
+    "text": "row,employee,position,code,detail_zh\n3,李二（合成）,会计,PROBATION_OVER_LIMIT,试用期 3 个月，超过该合同期限的上限 2 个月。\n4,王三（合成）,销售,CONTRACT_EXPIRED,合同已于 2026-02-28 到期（247 天前），请确认是否续签或终止。\n5,赵四（合成）,客服,PROBATION_PAY_BELOW_80,试用期工资 7999.00 元，为约定月工资 10000.00 元的 79.99%，低于 80% 下限。\n7,周六（合成）,人事专员,CONTRACT_EXPIRING,合同将于 2027-01-15 到期（还剩 74 天），已进入 90 天续签提醒窗口。\n"
+  }
+}

@@ -1,0 +1,14 @@
+Third-party notices for dsh-labor-contract
+
+Runtime:
+- No third-party runtime dependency. The three tools use only Node.js built-in
+  modules and the host-provided @deepseek-ai/cordis and @deepseek-ai/dsh-tools
+  contracts (MIT).
+
+Development only (not shipped in lib/):
+- typescript 7.0.2 (Apache-2.0) — build tool.
+- @types/node (MIT) — type declarations.
+- @deepseek-ai/cordis and @deepseek-ai/dsh-tools (MIT) — host plugin/tool contracts.
+
+No customer data is included. All samples and fixtures are synthetic; the
+clause/date review is not legal advice.

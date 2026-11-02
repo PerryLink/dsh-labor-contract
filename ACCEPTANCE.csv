@@ -1,0 +1,11 @@
+req_id,metric,threshold,actual,script,evidence_sha256,pass,source,counted
+LABOR-A01,nine required clauses present,9/9,9/9,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A02,missing clauses detected,9,9,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A03,probation cap boundary,ok/over/over,ok/over_limit/over_limit,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A04,80% probation-pay boundary,ok/below_80,ok/below_80,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A05,6-person batch issues,4,6rows/4issues,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A06,expiry window,1expired/1expiring,1expired/1expiring,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A07,invalid date error,E_LABOR_DATE_INVALID,E_LABOR_DATE_INVALID,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A08,export path safety,E_LABOR_PATH_INVALID,E_LABOR_PATH_INVALID,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+LABOR-A09,export sha256/bytes,matches file,ok,scripts/acceptance.mjs,e466d20945c60e38f93967729694713e8a3b33b34e747b686f807d90f80cf6e1,true,public/synthetic,false
+PS1-QS01,quickstart 样例与金标一致,1/1,1,samples/quickstart/run.mjs,10ef553e99e8ca3bdb82632321cce2b996132223f152253c9e6d6ea0361102e5,true,synthetic/quickstart,true

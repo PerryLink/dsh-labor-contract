@@ -1,0 +1,14 @@
+$ node samples/quickstart/run.mjs --check
+dsh-labor-contract quickstart - synthetic contract (not legal advice)
+clauses: 9 present / 0 attention / 0 missing; term 36 months
+probation: 3 months, limit 6 -> ok
+probation pay: 90.00% -> ok
+non-compete: present
+batch 2026-11-02: 6 employees, 4 issues, 1 expired / 1 expiring
+  row 3 李二（合成） PROBATION_OVER_LIMIT
+  row 4 王三（合成） CONTRACT_EXPIRED
+  row 5 赵四（合成） PROBATION_PAY_BELOW_80
+  row 7 周六（合成） CONTRACT_EXPIRING
+export exports/labor-issues.csv: 4 rows, 566 bytes, sha256 3fed842ff887...
+golden samples/quickstart/expected/result.json matches
+quickstart ok

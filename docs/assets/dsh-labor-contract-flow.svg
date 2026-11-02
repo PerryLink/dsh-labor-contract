@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="220" viewBox="0 0 920 220" role="img" aria-label="dsh-labor-contract workflow">
+  <rect width="920" height="220" rx="18" fill="#0b1020"/>
+  <g font-family="ui-sans-serif,Segoe UI,Helvetica,Arial,sans-serif" font-size="15" fill="#e8edf7">
+    <rect x="30" y="70" width="210" height="80" rx="14" fill="#141b30" stroke="#6ea8fe" stroke-width="2"/>
+    <text x="135" y="100" text-anchor="middle" font-weight="700">Contract text + CSV</text>
+    <text x="135" y="124" text-anchor="middle" fill="#9fb3d9">9 clauses · 6 employees</text>
+
+    <rect x="355" y="70" width="210" height="80" rx="14" fill="#141b30" stroke="#6ea8fe" stroke-width="2"/>
+    <text x="460" y="100" text-anchor="middle" font-weight="700">labor.check · labor.batch</text>
+    <text x="460" y="124" text-anchor="middle" fill="#9fb3d9">probation · 80% · expiry</text>
+
+    <rect x="680" y="70" width="210" height="80" rx="14" fill="#141b30" stroke="#3fb950" stroke-width="2"/>
+    <text x="785" y="100" text-anchor="middle" font-weight="700">Issue CSV + sha256</text>
+    <text x="785" y="124" text-anchor="middle" fill="#9fb3d9">$DSH_HOME/dsh-labor-contract</text>
+
+    <path d="M240 110h115M565 110h115" stroke="#6ea8fe" stroke-width="3" stroke-linecap="round"/>
+    <path d="M347 104l12 6-12 6M672 104l12 6-12 6" fill="#6ea8fe"/>
+    <text x="460" y="42" text-anchor="middle" fill="#9fb3d9">not legal advice · human review required</text>
+    <text x="460" y="190" text-anchor="middle" fill="#9fb3d9">local only · no network · no OCR · no model call</text>
+  </g>
+</svg>
