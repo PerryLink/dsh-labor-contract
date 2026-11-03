@@ -1,6 +1,6 @@
 {
   "name": "dsh-labor-contract",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "Review a labor contract's required clauses, probation cap and probation pay ratio; batch-check contract dates and export an issue list. Local only, not legal advice.",
   "type": "module",
   "main": "./lib/plugin/index.js",

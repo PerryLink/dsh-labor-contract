@@ -171,7 +171,7 @@ No. All three tools are local code: no network, no upload, no model call. `labor
 
 ## Version
 
-`0.1.0-alpha.1` · 31 tests pass (`node --test test/*.test.mjs`).
+`0.1.0` · 31 tests pass (`node --test test/*.test.mjs`).
 
 > ⭐ If this helps, a star makes it easier for the next person to find it. Nothing is gated behind it.
 

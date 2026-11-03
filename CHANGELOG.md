@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.0] — 2026-11-03
+
+### Stable
+
+- First non-alpha release: tool names and the CLI surface are covered by a
+  compatibility promise (breaking changes require a minor bump).
+- Ships a quickstart sample, a one-line prompt, a permission block and real captures.
+
 ## 0.1.0-alpha.1 — 2026-11-02
 
 - Initial alpha: `labor.check` (nine required clauses, probation cap, 80% probation pay, non-compete compensation prompt), `labor.batch` (CSV batch: over-cap probation, expired / 90-day expiring contracts, probation pay below 80%), `labor.export` (RFC 4180 CSV under `safeExportPath`).
