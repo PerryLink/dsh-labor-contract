@@ -35,10 +35,6 @@ for (const entry of [
   'lib',
   'cordis.patch.yml',
   'README.md',
-  'README-zh.md',
-  'README-es.md',
-  'README-pt.md',
-  'README-hi.md',
   'TROUBLESHOOTING.md',
   'samples',
   'docs/assets',
@@ -47,26 +43,21 @@ for (const entry of [
   check(files.includes(entry), `files[] must include ${entry}`)
 }
 
-for (const name of ['README-es.md', 'README-pt.md', 'README-hi.md']) {
-  check(existsSync(name), `${name} is missing`)
-  check(read(name).includes('dsh-labor-contract'), `${name} must mention dsh-labor-contract`)
-}
-
-const readmeZh = read('README-zh.md')
-const readme = read('README.md')
+const readmeZh = read('README.md')
+const readme = read('README.en.md')
 const troubleshooting = read('TROUBLESHOOTING.md')
 for (const [label, text, patterns] of [
-  ['README-zh', readmeZh, [/一句话/, /适合[\s\S]*不适合/, /输入/, /输出/, /示例/, /权限/, /^#{2,3}\s*FAQ/m, new RegExp(pkg.version.replace(/\./g, '\\.'))]],
-  ['README', readme, [/One-liner|一句话|What it does/i, /Fit/i, /Input/i, /Output/i, /Example|Quick start/i, /Permission/i, /FAQ/i, new RegExp(pkg.version.replace(/\./g, '\\.'))]],
+  ['README.md', readmeZh, [/它是什么/, /适合[\s\S]*不适合/, /输入/, /输出/, /示例/, /权限/, /^#{2,3}\s*FAQ/m, new RegExp(pkg.version.replace(/\./g, '\\.'))]],
+  ['README.en.md', readme, [/What it is/i, /Fit/i, /Input/i, /Output/i, /Example|Quick start/i, /Permission/i, /FAQ/i, new RegExp(pkg.version.replace(/\./g, '\\.'))]],
 ]) {
   for (const pattern of patterns) check(pattern.test(text), `${label} is missing section matching ${pattern}`)
 }
-check(/读[:：]/.test(readmeZh), 'README-zh must declare 读：')
-check(/写[:：]/.test(readmeZh), 'README-zh must declare 写：')
-check(/联网[:：]/.test(readmeZh), 'README-zh must declare 联网：')
-check(/外部系统[:：]/.test(readmeZh), 'README-zh must declare 外部系统：')
-check(demo?.prompt && readmeZh.includes(demo.prompt.slice(0, 12)), 'README-zh must contain dsh.demo.prompt')
-check(readmeZh.includes('不构成法律意见') || readmeZh.includes('不是法律意见'), 'README-zh must state that this is not legal advice')
+check(/读[:：]/.test(readmeZh), 'README.md must declare 读：')
+check(/写[:：]/.test(readmeZh), 'README.md must declare 写：')
+check(/联网[:：]/.test(readmeZh), 'README.md must declare 联网：')
+check(/外部系统[:：]/.test(readmeZh), 'README.md must declare 外部系统：')
+check(demo?.prompt && readmeZh.includes(demo.prompt.slice(0, 12)), 'README.md must contain dsh.demo.prompt')
+check(readmeZh.includes('不构成法律意见') || readmeZh.includes('不是法律意见'), 'README.md must state that this is not legal advice')
 
 const codeMatches = [...troubleshooting.matchAll(/\bE_LABOR_[A-Z0-9_]+\b/g)].map((match) => match[0])
 check(new Set(codeMatches).size >= 4, `TROUBLESHOOTING must list all 4 E_LABOR_* codes, got ${new Set(codeMatches).size}`)
