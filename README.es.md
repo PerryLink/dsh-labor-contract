@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-light.svg" width="100%" alt="Flujo de dsh-labor-contract: texto de contrato local + CSV de empleados → labor.check / labor.batch → labor.export CSV de incidencias + sha256 → escritura local en $DSH_HOME/exports; sin red, sin llamadas a modelos">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="Banner de dsh-labor-contract: a la derecha, el tablero de las nueve cláusulas de labor.check (present 9, attention 0, missing 0) sobre tres escalas — periodo de prueba 3 / 6 meses, salario de prueba 10800.00 / 12000.00 = 90.00% con el suelo del 80% marcado, y una regla de no competencia de 24 / 24 meses; el pie de la tarjeta resume labor.batch 6 filas a 4 incidencias (vencidas 1 / por vencer 1) y labor.export 4 filas / 566 B / sha256 3fed842f...; los valores salen de samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -40,6 +40,11 @@ Solo comprueba **cobertura de cláusulas, fechas y proporciones**: todo se ejecu
 
 - **Sirve para:** una autocomprobación estructurada antes de firmar por parte de RR. HH. o legal ops; revisiones por lotes de 6–500 empleados; entregar una lista de incidencias estructurada a un revisor; alimentar un registro de contratos.
 - **No sirve para:** sustituir a un abogado; decidir validez, penalizaciones, equity, confidencialidad o titularidad de la propiedad intelectual; leer PDF, escaneos o DOCX directamente (solo texto); comprobar el salario mínimo local, la base de la seguridad social o los impuestos sobre la nómina.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="Estructura de dsh-labor-contract: una mesa de revisión local de tres niveles. 01 banco de cláusulas — el contrato en texto plano de solo lectura pasa por labor.check (R0); cada una de las nueve cláusulas obligatorias supera dos puertas (palabra clave y elemento concreto) hasta present / attention / missing (quickstart: 9 / 0 / 0). 02 escalas — la duración en meses completos inclusivos da la escalera del límite de prueba (menos de 3 da 0, 3-11 da 1, 12-35 da 2, 36 o más y sin plazo fijo dan 6); el salario de prueba se compara en céntimos con el suelo del 80% (1080000 debe quedar en o por encima de 960000, así que exactamente el 80% pasa); la no competencia se mide contra el tope de 24 meses con aviso de compensación mensual. 03 hoja de incidencias — employees.csv (7 columnas, 6 filas, as_of 2026-11-02) pasa por labor.batch (R0) y produce cuatro incidencias mostradas como medido frente a umbral; labor.export (R1) escribe esas 4 filas como CSV RFC 4180 en $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv y devuelve 566 B y un sha256. Todo local: sin red, sin llamadas a modelos, sin asesoramiento jurídico">
+</picture>
 
 ## Instalación en tres pasos
 
@@ -331,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Versión actual `0.1.0` · 31 pruebas superadas (`node --test test/*.test.mjs`). Las imágenes del README se generan programáticamente con [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python; el diagrama de flujo hero es un SVG escrito a mano en variantes clara y oscura) y puede reejecutarse en cualquier momento.
+Versión actual `0.1.0` · 31 pruebas superadas (`node --test test/*.test.mjs`). Las imágenes del README se generan programáticamente con [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; el banner hero es un webp de 1440x576 en zh/en x claro/oscuro, el diagrama de estructura es un SVG escrito a mano de 1100x660 en variantes clara y oscura, y sus cifras se leen del archivo dorado del quickstart) y puede reejecutarse en cualquier momento.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

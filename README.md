@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-light.svg" width="100%" alt="dsh-labor-contract 流水线：本地合同文本与员工 CSV → labor.check / labor.batch → labor.export 问题 CSV + sha256 → $DSH_HOME/exports 本地写；不联网、不调用模型">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-labor-contract-hero-zh-light.webp" width="100%" alt="dsh-labor-contract 横幅：右侧是 labor.check 的九项必备条款记分板（命中 9 / 待补 0 / 缺失 0），下方三条量尺——试用期 3 / 6 个月、试用期工资 10800.00 ÷ 12000.00 = 90.00%（80% 下限用虚线标出）、竞业限制 24 / 24 个月；卡片底部是 labor.batch 6 行 → 4 个问题（已过期 1 / 90 天内 1）与 labor.export 4 行 / 566 B / sha256 3fed842f…；数值取自 samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -40,6 +40,11 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 - **适合**：HR / 法务在签前做一次结构化自查；6–500 人的合同批量体检；把问题清单交给业务或律师复核；作为合同台账的输入。
 - **不适合**：替代律师出具法律意见；判断条款效力、违约金、股权、保密或知识产权归属；从 PDF、扫描件或 DOCX 直接读合同（本包只吃纯文本）；核对当地最低工资、社保基数或个税（这些要按城市和年度另行核对）。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract 结构：三层本地评审台。01 条款台——劳动合同纯文本（只读）经 labor.check（R0）逐条比对九项必备条款：关键词、具体要素两道闸门，落成 present / attention / missing（quickstart 为 9 / 0 / 0）；02 判据尺——按含结束日的整月数给出试用期上限阶梯（不满 3 → 0、3–11 → 1、12–35 → 2、≥36 或无固定期限 → 6），试用期工资按分比较 80% 下限（1080000 ≥ 960000，正好 80% 也算过），竞业限制按 24 个月上限量并提示按月补偿；03 问题单——employees.csv（7 列 6 行，as_of 2026-11-02）经 labor.batch（R0）得到 4 条问题，每条按「实测 vs 阈值」列出；labor.export（R1）把这 4 行写成 RFC 4180 CSV，落到 $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv，返回 566 B 与 sha256；全程本地，不联网、不调用模型、不构成法律意见">
+</picture>
 
 ## 三步上手
 
@@ -322,7 +327,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-当前版本 `0.1.0` · 31 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python；hero 流程图为手写 SVG 的深浅双版），可重复执行。
+当前版本 `0.1.0` · 31 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
 
 Topics：`deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-light.svg" width="100%" alt="dsh-labor-contract पाइपलाइन: लोकल अनुबंध टेक्स्ट + कर्मचारी CSV → labor.check / labor.batch → labor.export समस्या CSV + sha256 → $DSH_HOME/exports में लोकल लेखन; बिना नेटवर्क, बिना मॉडल कॉल">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract बैनर: दाईं ओर labor.check का नौ-क्लॉज़ बोर्ड (present 9, attention 0, missing 0) और उसके नीचे तीन मापदंड — परिवीक्षा 3 / 6 महीने, परिवीक्षा वेतन 10800.00 / 12000.00 = 90.00% जिसमें 80% की सीमा अंकित है, और 24 / 24 महीने की गैर-प्रतिस्पर्धा रेखा; कार्ड के नीचे labor.batch 6 पंक्तियाँ से 4 मुद्दे (समाप्त 1 / समाप्त होने वाले 1) और labor.export 4 पंक्तियाँ / 566 B / sha256 3fed842f...; मान samples/quickstart/expected/result.json से लिए गए हैं">
 </picture>
 
 # dsh-labor-contract
@@ -40,6 +40,11 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 - **उपयुक्त:** HR या कानूनी संचालन द्वारा हस्ताक्षर से पहले संरचित स्व-जाँच; 6–500 कर्मचारियों की बैच समीक्षा; समीक्षक को संरचित समस्या सूची देना; अनुबंध रजिस्टर के इनपुट के रूप में उपयोग।
 - **अनुपयुक्त:** वकील की जगह लेना; वैधता, जुर्माना, इक्विटी, गोपनीयता या बौद्धिक संपदा स्वामित्व तय करना; PDF, स्कैन या DOCX सीधे पढ़ना (केवल टेक्स्ट); स्थानीय न्यूनतम वेतन, सामाजिक-सुरक्षा आधार या पेरोल कर की जाँच।
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract की संरचना: तीन स्तरों वाली लोकल समीक्षा बेंच। 01 क्लॉज़ बेंच — सादा केवल-पठनीय अनुबंध टेक्स्ट labor.check (R0) से गुज़रता है; नौ अनिवार्य क्लॉज़ में से हर एक दो द्वार (कीवर्ड और ठोस तत्व) पार करके present / attention / missing पर पहुँचता है (quickstart: 9 / 0 / 0)। 02 मापदंड — समावेशी पूरे महीनों की अवधि परिवीक्षा-सीमा की सीढ़ी देती है (3 से कम → 0, 3-11 → 1, 12-35 → 2, 36 या अधिक और अनिश्चित अवधि → 6); परिवीक्षा वेतन की तुलना सेंट में 80% फ़्लोर से होती है (1080000 को 960000 या उससे ऊपर रहना है, इसलिए ठीक 80% भी पास होता है); गैर-प्रतिस्पर्धा खंड 24 महीने की सीमा के सामने मापा जाता है और मासिक मुआवज़े का संकेत दिया जाता है। 03 मुद्दा पत्रक — employees.csv (7 कॉलम, 6 पंक्तियाँ, as_of 2026-11-02) labor.batch (R0) से चार मुद्दे बनाता है, हर एक मापा-बनाम-सीमा के रूप में; labor.export (R1) उन 4 पंक्तियों को RFC 4180 CSV के रूप में $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv में लिखता है और 566 B तथा sha256 लौटाता है। सब कुछ लोकल: बिना नेटवर्क, बिना मॉडल कॉल, कानूनी सलाह नहीं">
+</picture>
 
 ## तीन चरणों में शुरुआत
 
@@ -331,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-वर्तमान संस्करण `0.1.0` · 31 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python; hero प्रवाह आरेख हाथ से लिखा गया SVG है, हल्के और गहरे दोनों रूपों में) और कभी भी दोबारा चलाई जा सकती हैं।
+वर्तमान संस्करण `0.1.0` · 31 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python/Pillow; hero बैनर 1440x576 का zh/en x हल्का/गहरा webp है, संरचना आरेख 1100x660 का हाथ से लिखा गया SVG है जो हल्के और गहरे दोनों रूपों में आता है, और उसके आँकड़े quickstart गोल्डन फ़ाइल से पढ़े जाते हैं) और कभी भी दोबारा चलाई जा सकती हैं।
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

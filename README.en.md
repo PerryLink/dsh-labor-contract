@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-light.svg" width="100%" alt="dsh-labor-contract pipeline: local contract text + employee CSV → labor.check / labor.batch → labor.export issue CSV + sha256 → local write under $DSH_HOME/exports; no network, no model call">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract banner: on the right, the nine-clause board produced by labor.check (present 9, attention 0, missing 0) above three scales — probation 3 / 6 months, probation pay 10800.00 / 12000.00 = 90.00% with the 80% floor marked, and a 24 / 24-month non-compete ruler; the card footer reads labor.batch 6 rows to 4 issues (expired 1 / expiring 1) and labor.export 4 rows / 566 B / sha256 3fed842f...; all values come from samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -40,6 +40,11 @@ It checks **clause coverage, dates and ratios** only: everything runs on your ma
 
 - **Fits:** a structured pre-signing self-check by HR or legal ops; batch checks for 6–500 employees; handing a structured issue list to a reviewer; feeding a contract register.
 - **Does not fit:** replacing a lawyer; deciding validity, penalties, equity, confidentiality or IP ownership; reading PDFs, scans or DOCX directly (text only); checking local minimum wage, social-insurance base or payroll tax.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract structure: a three-tier local review bench. 01 clause bench — the contract as plain read-only text goes through labor.check (R0); each of the nine required clauses passes two gates (keyword, concrete element) into present / attention / missing (quickstart: 9 / 0 / 0). 02 scales — the inclusive whole-month term gives the probation-cap staircase (under 3 gives 0, 3-11 gives 1, 12-35 gives 2, 36 or more and open-ended give 6); probation pay is compared in cents against the 80% floor (1080000 must stay at or above 960000, so exactly 80% passes); the non-compete clause is measured against the 24-month cap with a monthly-compensation prompt. 03 issue sheet — employees.csv (7 columns, 6 rows, as_of 2026-11-02) goes through labor.batch (R0) into four issues shown as measured versus threshold; labor.export (R1) writes those 4 rows as RFC 4180 CSV under $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv and returns 566 B plus a sha256. Everything is local: no network, no model call, not legal advice">
+</picture>
 
 ## Three-step setup
 
@@ -331,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Current version `0.1.0` · 31 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python; the hero pipeline is a hand-written SVG in light and dark variants) and can be re-run at any time.
+Current version `0.1.0` · 31 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 
