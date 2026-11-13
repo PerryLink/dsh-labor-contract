@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-zh-dark.webp">
-  <img src="docs/assets/dsh-labor-contract-hero-zh-light.webp" width="100%" alt="dsh-labor-contract 横幅：右侧是 labor.check 的九项必备条款记分板（命中 9 / 待补 0 / 缺失 0），下方三条量尺——试用期 3 / 6 个月、试用期工资 10800.00 ÷ 12000.00 = 90.00%（80% 下限用虚线标出）、竞业限制 24 / 24 个月；卡片底部是 labor.batch 6 行 → 4 个问题（已过期 1 / 90 天内 1）与 labor.export 4 行 / 566 B / sha256 3fed842f…；数值取自 samples/quickstart/expected/result.json">
+  <img src="docs/assets/dsh-labor-contract-hero-zh-light.webp" width="100%" alt="dsh-labor-contract 横幅：右侧是 labor_check 的九项必备条款记分板（命中 9 / 待补 0 / 缺失 0），下方三条量尺——试用期 3 / 6 个月、试用期工资 10800.00 ÷ 12000.00 = 90.00%（80% 下限用虚线标出）、竞业限制 24 / 24 个月；卡片底部是 labor_batch 6 行 → 4 个问题（已过期 1 / 90 天内 1）与 labor_export 4 行 / 566 B / sha256 3fed842f…；数值取自 samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -43,7 +43,7 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract 结构：三层本地评审台。01 条款台——劳动合同纯文本（只读）经 labor.check（R0）逐条比对九项必备条款：关键词、具体要素两道闸门，落成 present / attention / missing（quickstart 为 9 / 0 / 0）；02 判据尺——按含结束日的整月数给出试用期上限阶梯（不满 3 → 0、3–11 → 1、12–35 → 2、≥36 或无固定期限 → 6），试用期工资按分比较 80% 下限（1080000 ≥ 960000，正好 80% 也算过），竞业限制按 24 个月上限量并提示按月补偿；03 问题单——employees.csv（7 列 6 行，as_of 2026-11-02）经 labor.batch（R0）得到 4 条问题，每条按「实测 vs 阈值」列出；labor.export（R1）把这 4 行写成 RFC 4180 CSV，落到 $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv，返回 566 B 与 sha256；全程本地，不联网、不调用模型、不构成法律意见">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract 结构：三层本地评审台。01 条款台——劳动合同纯文本（只读）经 labor_check（R0）逐条比对九项必备条款：关键词、具体要素两道闸门，落成 present / attention / missing（quickstart 为 9 / 0 / 0）；02 判据尺——按含结束日的整月数给出试用期上限阶梯（不满 3 → 0、3–11 → 1、12–35 → 2、≥36 或无固定期限 → 6），试用期工资按分比较 80% 下限（1080000 ≥ 960000，正好 80% 也算过），竞业限制按 24 个月上限量并提示按月补偿；03 问题单——employees.csv（7 列 6 行，as_of 2026-11-02）经 labor_batch（R0）得到 4 条问题，每条按「实测 vs 阈值」列出；labor_export（R1）把这 4 行写成 RFC 4180 CSV，落到 $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv，返回 566 B 与 sha256；全程本地，不联网、不调用模型、不构成法律意见">
 </picture>
 
 ## 三步上手
@@ -81,9 +81,9 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 | 工具 | 用途 | 风险 |
 |---|---|---|
-| `labor.check` | 单份合同：九项必备条款覆盖 + 试用期上限 + 试用期工资 80% + 竞业限制补偿提示 | R0（只读） |
-| `labor.batch` | CSV 批量：试用期超限、合同到期 / 90 天内到期、试用期工资不足 80% | R0（只读） |
-| `labor.export` | 把问题清单写成带引号转义的 CSV，返回路径与 sha256 | R1（只写本地 exports） |
+| `labor_check` | 单份合同：九项必备条款覆盖 + 试用期上限 + 试用期工资 80% + 竞业限制补偿提示 | R0（只读） |
+| `labor_batch` | CSV 批量：试用期超限、合同到期 / 90 天内到期、试用期工资不足 80% | R0（只读） |
+| `labor_export` | 把问题清单写成带引号转义的 CSV，返回路径与 sha256 | R1（只写本地 exports） |
 
 - **九项必备条款**：合同期限、工作内容、工作地点、工时与休息休假、劳动报酬、社会保险、劳动保护与劳动条件、解除与终止、争议解决，逐项给出 `present` / `attention` / `missing` 与证据句。
 - **试用期上限**：按含结束日的整数月判断 0 / 1 / 2 / 6 个月上限；识别不到合同期限就返回 `unknown`，不猜。
@@ -102,13 +102,13 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 ```sh
 # 1) 单份合同体检
-#    工具面：labor.check({ text: "<合同正文>" })
+#    工具面：labor_check({ text: "<合同正文>" })
 
 # 2) 批量核对
-#    工具面：labor.batch({ csv: "<CSV 文本>", as_of: "2026-11-02" })
+#    工具面：labor_batch({ csv: "<CSV 文本>", as_of: "2026-11-02" })
 
 # 3) 导出问题清单
-#    工具面：labor.export({ issues: [...labor.batch 的 issues], filename: "labor-issues.csv" })
+#    工具面：labor_export({ issues: [...labor_batch 的 issues], filename: "labor-issues.csv" })
 ```
 
 复跑自带样例并核对金标：
@@ -123,13 +123,13 @@ node samples/quickstart/run.mjs --check
 
 ## 输入
 
-- `labor.check`：一段劳动合同**纯文本**（`.txt` / 粘贴的正文）。如果手上是 PDF、扫描件或 DOCX，请先用你信任的工具转成文本；本包不做 OCR，也不解析二进制文档。
-- `labor.batch`：一份 UTF-8 CSV，表头固定为
+- `labor_check`：一段劳动合同**纯文本**（`.txt` / 粘贴的正文）。如果手上是 PDF、扫描件或 DOCX，请先用你信任的工具转成文本；本包不做 OCR，也不解析二进制文档。
+- `labor_batch`：一份 UTF-8 CSV，表头固定为
   `employee,position,contract_start,contract_end,probation_months,monthly_salary,probation_salary`。
   - `probation_salary` 可省略；省略时无法做 80% 比例检查。
   - 日期必须是 `YYYY-MM-DD`；`contract_end` 也可以写 `无固定期限`。
   - 金额写 `1234.56`，不要带 `¥`、空格或中文单位。
-- `labor.export`：一组问题行（通常直接传 `labor.batch` 的 `issues`）和一个安全文件名。
+- `labor_export`：一组问题行（通常直接传 `labor_batch` 的 `issues`）和一个安全文件名。
 - 所有输入只读；不会修改你的合同或 CSV。
 
 | 列 | 必填 | 说明 |
@@ -149,9 +149,9 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ## 输出
 
-- `labor.check`：`clauses`（9 项，每项 `present` / `attention` / `missing` + 证据句 + 提示）、`summary`、`term`、`probation`、`probation_pay`、`non_compete`，以及 `disclaimer_zh`。
-- `labor.batch`：`as_of`、`rows`、`issues`、`due.expired` / `due.expiring`、`summary.by_code`。
-- `labor.export`：CSV 路径、行数、字节数、`sha256`。文件写到 `$DSH_HOME/dsh-labor-contract/exports/`。
+- `labor_check`：`clauses`（9 项，每项 `present` / `attention` / `missing` + 证据句 + 提示）、`summary`、`term`、`probation`、`probation_pay`、`non_compete`，以及 `disclaimer_zh`。
+- `labor_batch`：`as_of`、`rows`、`issues`、`due.expired` / `due.expiring`、`summary.by_code`。
+- `labor_export`：CSV 路径、行数、字节数、`sha256`。文件写到 `$DSH_HOME/dsh-labor-contract/exports/`。
 - 所有日期都是 `YYYY-MM-DD`；金额在内部按分计算，避免浮点误差。
 
 ## 判定规则
@@ -184,7 +184,7 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ### 试用期工资 80%
 
-`labor.check` 从文本里找“试用期工资”“转正后月工资 / 月工资”，按分比较：`试用期工资 × 100 < 约定工资 × 80` 才算低于 80%，正好 80% 通过。`labor.batch` 对每一行做同样比较。**同时还要满足当地最低工资标准**，这个本包不知道，需要你按城市核对。
+`labor_check` 从文本里找“试用期工资”“转正后月工资 / 月工资”，按分比较：`试用期工资 × 100 < 约定工资 × 80` 才算低于 80%，正好 80% 通过。`labor_batch` 对每一行做同样比较。**同时还要满足当地最低工资标准**，这个本包不知道，需要你按城市核对。
 
 ### 竞业限制提示
 
@@ -192,7 +192,7 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ### 批量到期
 
-`labor.batch` 以 `as_of`（默认当天）为基准：
+`labor_batch` 以 `as_of`（默认当天）为基准：
 
 - `contract_end < as_of`：`CONTRACT_EXPIRED`，进入 `due.expired`。
 - `0 ≤ contract_end - as_of ≤ 90`：`CONTRACT_EXPIRING`，进入 `due.expiring`。
@@ -212,11 +212,11 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 | 参数 | 默认值 | 含义 |
 |---|---|---|
-| `text` | （必填，`labor.check`） | 劳动合同纯文本；只读，不做 OCR |
-| `csv` | （必填，`labor.batch`） | 员工合同 CSV 文本，表头固定，逗号分隔 |
-| `as_of` | 当天 | `labor.batch` 的到期基准日，`YYYY-MM-DD` |
-| `issues` | （必填，`labor.export`） | 问题行数组，通常直接传 `labor.batch` 的 `issues` |
-| `filename` | 按日期生成 | `labor.export` 的文件名，只允许 `[A-Za-z0-9._-]`；固定写到 `$DSH_HOME/dsh-labor-contract/exports/` |
+| `text` | （必填，`labor_check`） | 劳动合同纯文本；只读，不做 OCR |
+| `csv` | （必填，`labor_batch`） | 员工合同 CSV 文本，表头固定，逗号分隔 |
+| `as_of` | 当天 | `labor_batch` 的到期基准日，`YYYY-MM-DD` |
+| `issues` | （必填，`labor_export`） | 问题行数组，通常直接传 `labor_batch` 的 `issues` |
+| `filename` | 按日期生成 | `labor_export` 的文件名，只允许 `[A-Za-z0-9._-]`；固定写到 `$DSH_HOME/dsh-labor-contract/exports/` |
 
 ## FAQ
 
@@ -258,18 +258,18 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 <details>
 <summary>会把合同上传或调用模型吗？</summary>
 
-不会。三个工具都是本地代码；不联网、不上传、不调用模型。`labor.export` 只写 `$DSH_HOME/dsh-labor-contract/exports/`。
+不会。三个工具都是本地代码；不联网、不上传、不调用模型。`labor_export` 只写 `$DSH_HOME/dsh-labor-contract/exports/`。
 
 </details>
 
 ## 权限与数据
 
 - 读：用户指定的劳动合同文本与员工合同 CSV（样例 `samples/quickstart/input/`）；不读其他目录。
-- 写：`$DSH_HOME/dsh-labor-contract/exports/`（仅 `labor.export`）；不改原合同与 CSV。
+- 写：`$DSH_HOME/dsh-labor-contract/exports/`（仅 `labor_export`）；不改原合同与 CSV。
 - 联网：否。
 - 外部系统：无。
 
-`labor.check`、`labor.batch` 是 **R0**（只读）；`labor.export` 是 **R1**（本地写，只写 `$DSH_HOME/dsh-labor-contract/exports/`）。可用 `DSH_LABOR_CONTRACT_HOME` 覆盖本地写根目录（测试用），默认严格等于 `$DSH_HOME/dsh-labor-contract`。
+`labor_check`、`labor_batch` 是 **R0**（只读）；`labor_export` 是 **R1**（本地写，只写 `$DSH_HOME/dsh-labor-contract/exports/`）。可用 `DSH_LABOR_CONTRACT_HOME` 覆盖本地写根目录（测试用），默认严格等于 `$DSH_HOME/dsh-labor-contract`。
 
 ## 已知限制
 
@@ -327,7 +327,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-当前版本 `0.1.0` · 31 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
+当前版本 `0.2.0` · 32 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
 
 Topics：`deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
-  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract banner: on the right, the nine-clause board produced by labor.check (present 9, attention 0, missing 0) above three scales — probation 3 / 6 months, probation pay 10800.00 / 12000.00 = 90.00% with the 80% floor marked, and a 24 / 24-month non-compete ruler; the card footer reads labor.batch 6 rows to 4 issues (expired 1 / expiring 1) and labor.export 4 rows / 566 B / sha256 3fed842f...; all values come from samples/quickstart/expected/result.json">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract banner: on the right, the nine-clause board produced by labor_check (present 9, attention 0, missing 0) above three scales — probation 3 / 6 months, probation pay 10800.00 / 12000.00 = 90.00% with the 80% floor marked, and a 24 / 24-month non-compete ruler; the card footer reads labor_batch 6 rows to 4 issues (expired 1 / expiring 1) and labor_export 4 rows / 566 B / sha256 3fed842f...; all values come from samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -43,7 +43,7 @@ It checks **clause coverage, dates and ratios** only: everything runs on your ma
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract structure: a three-tier local review bench. 01 clause bench — the contract as plain read-only text goes through labor.check (R0); each of the nine required clauses passes two gates (keyword, concrete element) into present / attention / missing (quickstart: 9 / 0 / 0). 02 scales — the inclusive whole-month term gives the probation-cap staircase (under 3 gives 0, 3-11 gives 1, 12-35 gives 2, 36 or more and open-ended give 6); probation pay is compared in cents against the 80% floor (1080000 must stay at or above 960000, so exactly 80% passes); the non-compete clause is measured against the 24-month cap with a monthly-compensation prompt. 03 issue sheet — employees.csv (7 columns, 6 rows, as_of 2026-11-02) goes through labor.batch (R0) into four issues shown as measured versus threshold; labor.export (R1) writes those 4 rows as RFC 4180 CSV under $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv and returns 566 B plus a sha256. Everything is local: no network, no model call, not legal advice">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract structure: a three-tier local review bench. 01 clause bench — the contract as plain read-only text goes through labor_check (R0); each of the nine required clauses passes two gates (keyword, concrete element) into present / attention / missing (quickstart: 9 / 0 / 0). 02 scales — the inclusive whole-month term gives the probation-cap staircase (under 3 gives 0, 3-11 gives 1, 12-35 gives 2, 36 or more and open-ended give 6); probation pay is compared in cents against the 80% floor (1080000 must stay at or above 960000, so exactly 80% passes); the non-compete clause is measured against the 24-month cap with a monthly-compensation prompt. 03 issue sheet — employees.csv (7 columns, 6 rows, as_of 2026-11-02) goes through labor_batch (R0) into four issues shown as measured versus threshold; labor_export (R1) writes those 4 rows as RFC 4180 CSV under $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv and returns 566 B plus a sha256. Everything is local: no network, no model call, not legal advice">
 </picture>
 
 ## Three-step setup
@@ -81,9 +81,9 @@ Tool names are stable API; descriptions stay in English to match runtime output.
 
 | Tool | Purpose | Risk |
 |---|---|---|
-| `labor.check` | One contract: nine required clauses + probation cap + 80% probation pay + non-compete compensation prompt | R0 (read-only) |
-| `labor.batch` | CSV batch: over-cap probation, expired / 90-day expiring contracts, probation pay below 80% | R0 (read-only) |
-| `labor.export` | Write the issue list as quoted CSV; return path and sha256 | R1 (local write under exports only) |
+| `labor_check` | One contract: nine required clauses + probation cap + 80% probation pay + non-compete compensation prompt | R0 (read-only) |
+| `labor_batch` | CSV batch: over-cap probation, expired / 90-day expiring contracts, probation pay below 80% | R0 (read-only) |
+| `labor_export` | Write the issue list as quoted CSV; return path and sha256 | R1 (local write under exports only) |
 
 - **Nine required clauses:** term, duties, location, hours/rest, pay, social insurance, labor protection, termination, dispute resolution — each with an evidence sentence and `present` / `attention` / `missing`.
 - **Probation cap:** 0 / 1 / 2 / 6 months by whole contract months (end date included); returns `unknown` instead of guessing when the term cannot be parsed.
@@ -104,13 +104,13 @@ Or call the tool surface directly:
 
 ```sh
 # 1) review one contract
-#    tool surface: labor.check({ text: "<contract body>" })
+#    tool surface: labor_check({ text: "<contract body>" })
 
 # 2) batch-check
-#    tool surface: labor.batch({ csv: "<CSV text>", as_of: "2026-11-02" })
+#    tool surface: labor_batch({ csv: "<CSV text>", as_of: "2026-11-02" })
 
 # 3) export the issue list
-#    tool surface: labor.export({ issues: [...batch.issues], filename: "labor-issues.csv" })
+#    tool surface: labor_export({ issues: [...batch.issues], filename: "labor-issues.csv" })
 ```
 
 Reproduce the bundled sample and compare with the golden file:
@@ -125,13 +125,13 @@ The sample is one synthetic 36-month contract plus six synthetic employees: all 
 
 ## Input
 
-- `labor.check`: one labor contract as **plain text** (`.txt` or a pasted body). Convert PDFs, scans or DOCX to text first; this package does no OCR and does not parse binary documents.
-- `labor.batch`: a UTF-8 CSV with the fixed header
+- `labor_check`: one labor contract as **plain text** (`.txt` or a pasted body). Convert PDFs, scans or DOCX to text first; this package does no OCR and does not parse binary documents.
+- `labor_batch`: a UTF-8 CSV with the fixed header
   `employee,position,contract_start,contract_end,probation_months,monthly_salary,probation_salary`.
   - `probation_salary` is optional; without it the 80% check is skipped.
   - Dates are `YYYY-MM-DD`; `contract_end` also accepts the Chinese open-ended keyword shown below.
   - Amounts use `1234.56`; no `¥`, spaces or Chinese units.
-- `labor.export`: an issue array (normally `labor.batch`'s `issues`) and a safe filename.
+- `labor_export`: an issue array (normally `labor_batch`'s `issues`) and a safe filename.
 - All inputs are read-only.
 
 Accepted `contract_end` values:
@@ -158,9 +158,9 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ## Output
 
-- `labor.check`: `clauses` (9 items, each `present` / `attention` / `missing` with an evidence sentence and a hint), `summary`, `term`, `probation`, `probation_pay`, `non_compete`, and `disclaimer_zh`.
-- `labor.batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`.
-- `labor.export`: CSV path, row count, bytes and `sha256`, written under `$DSH_HOME/dsh-labor-contract/exports/`.
+- `labor_check`: `clauses` (9 items, each `present` / `attention` / `missing` with an evidence sentence and a hint), `summary`, `term`, `probation`, `probation_pay`, `non_compete`, and `disclaimer_zh`.
+- `labor_batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`.
+- `labor_export`: CSV path, row count, bytes and `sha256`, written under `$DSH_HOME/dsh-labor-contract/exports/`.
 - Dates are `YYYY-MM-DD`; money is compared in integer cents to avoid floating-point drift.
 
 ## Decision rules
@@ -193,7 +193,7 @@ Boundaries use inclusive whole months: 2026-01-01 to 2026-03-31 is 3 months; to 
 
 ### 80% probation pay
 
-`labor.check` extracts the probation wage and the regular monthly wage, then compares in cents: below 80% only when `probation × 100 < regular × 80`; exactly 80% passes. `labor.batch` applies the same rule per row. **The local minimum wage is a separate test this package cannot know** — check it for your city.
+`labor_check` extracts the probation wage and the regular monthly wage, then compares in cents: below 80% only when `probation × 100 < regular × 80`; exactly 80% passes. `labor_batch` applies the same rule per row. **The local minimum wage is a separate test this package cannot know** — check it for your city.
 
 ### Non-compete prompt
 
@@ -221,11 +221,11 @@ This plugin has no profile-level config keys (`cordis.patch.yml` only inserts th
 
 | Parameter | Default | Meaning |
 |---|---|---|
-| `text` | (required, `labor.check`) | Labor contract plain text; read-only, no OCR |
-| `csv` | (required, `labor.batch`) | Employee contract CSV text, fixed header, comma separated |
-| `as_of` | today | `labor.batch` expiry reference date, `YYYY-MM-DD` |
-| `issues` | (required, `labor.export`) | Issue array, normally `labor.batch`'s `issues` |
-| `filename` | derived from the date | `labor.export` filename, `[A-Za-z0-9._-]` only; always written under `$DSH_HOME/dsh-labor-contract/exports/` |
+| `text` | (required, `labor_check`) | Labor contract plain text; read-only, no OCR |
+| `csv` | (required, `labor_batch`) | Employee contract CSV text, fixed header, comma separated |
+| `as_of` | today | `labor_batch` expiry reference date, `YYYY-MM-DD` |
+| `issues` | (required, `labor_export`) | Issue array, normally `labor_batch`'s `issues` |
+| `filename` | derived from the date | `labor_export` filename, `[A-Za-z0-9._-]` only; always written under `$DSH_HOME/dsh-labor-contract/exports/` |
 
 ## FAQ
 
@@ -267,18 +267,18 @@ It is this package's default renewal reminder, not a statutory value. Change `EX
 <details>
 <summary>Does it upload contracts or call a model?</summary>
 
-No. All three tools are local code: no network, no upload, no model call. `labor.export` writes only under `$DSH_HOME/dsh-labor-contract/exports/`.
+No. All three tools are local code: no network, no upload, no model call. `labor_export` writes only under `$DSH_HOME/dsh-labor-contract/exports/`.
 
 </details>
 
 ## Permissions & data
 
 - **Read:** the contract text and employee CSV the user names (sample: `samples/quickstart/input/`); nothing else.
-- **Write:** `$DSH_HOME/dsh-labor-contract/exports/` only (`labor.export`); source files are untouched.
+- **Write:** `$DSH_HOME/dsh-labor-contract/exports/` only (`labor_export`); source files are untouched.
 - **Network:** no.
 - **External systems:** none.
 
-`labor.check` and `labor.batch` are **R0** (read-only). `labor.export` is **R1** (local write under `$DSH_HOME/dsh-labor-contract`). `DSH_LABOR_CONTRACT_HOME` can override the local write root for tests; the default is exactly `$DSH_HOME/dsh-labor-contract`.
+`labor_check` and `labor_batch` are **R0** (read-only). `labor_export` is **R1** (local write under `$DSH_HOME/dsh-labor-contract`). `DSH_LABOR_CONTRACT_HOME` can override the local write root for tests; the default is exactly `$DSH_HOME/dsh-labor-contract`.
 
 ## Known limitations
 
@@ -336,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Current version `0.1.0` · 31 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
+Current version `0.2.0` · 32 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 
