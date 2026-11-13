@@ -13,7 +13,7 @@ const tools = Object.fromEntries(
   createTools({ baseDir: path.join(os.tmpdir(), 'dsh-labor-contract-batch') }).map((tool) => [tool.name, tool]),
 )
 const exec = { callId: 'labor-batch-test' }
-const batch = (csv, asOf = '2026-11-02') => tools['labor.batch'].execute({ csv, as_of: asOf }, exec)
+const batch = (csv, asOf = '2026-11-02') => tools['labor_batch'].execute({ csv, as_of: asOf }, exec)
 const HEADER = 'employee,position,contract_start,contract_end,probation_months,monthly_salary,probation_salary\n'
 
 test('the bundled 6-person CSV yields exactly one issue per failing check', async () => {

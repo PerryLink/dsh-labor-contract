@@ -33,11 +33,11 @@ test('csvField escapes commas, quotes and newlines and toCsv keeps a trailing ne
   assert.equal(toCsv([['a', 'b'], ['c', 'd']]), 'a,b\nc,d\n')
 })
 
-test('labor.export writes a quoted UTF-8 CSV with path, rows, bytes and sha256', async (t) => {
+test('labor_export writes a quoted UTF-8 CSV with path, rows, bytes and sha256', async (t) => {
   const dir = await tempDir(t)
   const baseDir = path.join(dir, 'store')
   const tools = Object.fromEntries(createTools({ baseDir }).map((tool) => [tool.name, tool]))
-  const result = await tools['labor.export'].execute({ issues: [ISSUE], filename: 'issues.csv' }, exec)
+  const result = await tools['labor_export'].execute({ issues: [ISSUE], filename: 'issues.csv' }, exec)
   assert.equal(result.path, path.join(await realpath(baseDir), 'exports', 'issues.csv'))
   assert.equal(result.rows, 1)
   const expected = toCsv([
@@ -49,31 +49,31 @@ test('labor.export writes a quoted UTF-8 CSV with path, rows, bytes and sha256',
   assert.equal(result.sha256, sha256(expected))
 })
 
-test('labor.export quotes commas, quotes and newlines in an issue detail', async (t) => {
+test('labor_export quotes commas, quotes and newlines in an issue detail', async (t) => {
   const dir = await tempDir(t)
   const tools = Object.fromEntries(createTools({ baseDir: path.join(dir, 'store') }).map((tool) => [tool.name, tool]))
   const issue = { ...ISSUE, employee: '甲,乙', detail_zh: '第一行\n说"是"；还有,逗号' }
-  const result = await tools['labor.export'].execute({ issues: [issue], filename: 'quoted.csv' }, exec)
+  const result = await tools['labor_export'].execute({ issues: [issue], filename: 'quoted.csv' }, exec)
   const content = await readFile(result.path, 'utf8')
   assert.match(content, /"甲,乙"/)
   assert.match(content, /"第一行\n说""是""；还有,逗号"/)
   assert.equal(result.sha256, sha256(content))
 })
 
-test('labor.export writes a header-only CSV for an empty issue list', async (t) => {
+test('labor_export writes a header-only CSV for an empty issue list', async (t) => {
   const dir = await tempDir(t)
   const tools = Object.fromEntries(createTools({ baseDir: path.join(dir, 'store') }).map((tool) => [tool.name, tool]))
-  const result = await tools['labor.export'].execute({ issues: [], filename: 'empty.csv' }, exec)
+  const result = await tools['labor_export'].execute({ issues: [], filename: 'empty.csv' }, exec)
   assert.equal(result.rows, 0)
   assert.equal(await readFile(result.path, 'utf8'), 'row,employee,position,code,detail_zh\n')
 })
 
-test('labor.export rejects traversal, separators and absolute paths with E_LABOR_PATH_INVALID', async (t) => {
+test('labor_export rejects traversal, separators and absolute paths with E_LABOR_PATH_INVALID', async (t) => {
   const dir = await tempDir(t)
   const tools = Object.fromEntries(createTools({ baseDir: path.join(dir, 'store') }).map((tool) => [tool.name, tool]))
   for (const filename of ['../evil.csv', '..\\evil.csv', '/tmp/evil.csv', 'a/b.csv', 'with space.csv', '表格.csv', '', '..', '.']) {
     await assert.rejects(
-      () => tools['labor.export'].execute({ issues: [ISSUE], filename }, exec),
+      () => tools['labor_export'].execute({ issues: [ISSUE], filename }, exec),
       (error) => error.code === 'E_LABOR_PATH_INVALID',
       filename,
     )
@@ -93,6 +93,6 @@ test('safeExportPath re-anchors a symlinked export directory on its realpath', a
 test('the default export filename is a dated safe component', async (t) => {
   const dir = await tempDir(t)
   const tools = Object.fromEntries(createTools({ baseDir: path.join(dir, 'store') }).map((tool) => [tool.name, tool]))
-  const result = await tools['labor.export'].execute({ issues: [ISSUE] }, exec)
+  const result = await tools['labor_export'].execute({ issues: [ISSUE] }, exec)
   assert.match(path.basename(result.path), /^labor-issues-\d{8}\.csv$/)
 })

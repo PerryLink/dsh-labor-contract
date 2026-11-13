@@ -34,9 +34,9 @@ async function run() {
     const contractText = await readFile(contractPath, 'utf8')
     const csvText = await readFile(csvPath, 'utf8')
 
-    const check = await tools['labor.check'].execute({ text: contractText }, exec)
-    const batch = await tools['labor.batch'].execute({ csv: csvText, as_of: AS_OF }, exec)
-    const exported = await tools['labor.export'].execute(
+    const check = await tools['labor_check'].execute({ text: contractText }, exec)
+    const batch = await tools['labor_batch'].execute({ csv: csvText, as_of: AS_OF }, exec)
+    const exported = await tools['labor_export'].execute(
       { issues: batch.issues, filename: 'labor-issues.csv' },
       exec,
     )

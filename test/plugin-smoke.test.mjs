@@ -10,12 +10,12 @@ import { createTools } from '../lib/plugin/tools.js'
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const contractPath = path.join(packageRoot, 'samples', 'quickstart', 'input', 'labor-contract.txt')
 
-test('createTools exposes the three labor.* tools with unique names and summaries', () => {
+test('createTools exposes the three labor_* tools with unique names and summaries', () => {
   const tools = createTools({ baseDir: path.join(os.tmpdir(), 'dsh-labor-contract-smoke') })
-  assert.deepEqual(tools.map((tool) => tool.name), ['labor.check', 'labor.batch', 'labor.export'])
+  assert.deepEqual(tools.map((tool) => tool.name), ['labor_check', 'labor_batch', 'labor_export'])
   assert.equal(new Set(tools.map((tool) => tool.name)).size, 3)
   for (const tool of tools) {
-    assert.ok(tool.name.startsWith('labor.'))
+    assert.ok(tool.name.startsWith('labor_'))
     assert.ok(tool.description.length > 0)
     assert.equal(typeof tool.execute, 'function')
     assert.equal(typeof tool.output.render, 'function')
@@ -46,11 +46,11 @@ test('apply() registers the tools and writes exports under the documented root',
   assert.deepEqual(plugin.inject, ['tools'])
   assert.equal(registered.length, 3)
 
-  const check = registered.find((tool) => tool.name === 'labor.check')
+  const check = registered.find((tool) => tool.name === 'labor_check')
   const result = await check.execute({ text: '劳动合同\n甲方：合成公司\n乙方：合成员工\n' }, { callId: 'apply' })
   assert.equal(result.summary.missing, 9)
 
-  const exportIssues = registered.find((tool) => tool.name === 'labor.export')
+  const exportIssues = registered.find((tool) => tool.name === 'labor_export')
   const exported = await exportIssues.execute({ issues: [], filename: 'apply.csv' }, { callId: 'apply' })
   assert.ok(exported.path.startsWith(`${dir}${path.sep}exports${path.sep}`), exported.path)
 })

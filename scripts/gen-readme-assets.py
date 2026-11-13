@@ -8,7 +8,7 @@ hero 1440x576  (Pillow; zh/en x light/dark = 4 webp files)
     Left column: kicker / title / two value lines / sub / meta / footer.
     Right card: the nine-clause coverage board (3x3; one chip per entry of
     CLAUSES in src/core/labor.ts) sitting over the three non-clause
-    verdicts of labor.check: the probation cap derived from contract term
+    verdicts of labor_check: the probation cap derived from contract term
     months (0/1/2/6), probation pay against the 80% floor compared in
     cents, and the 24-month non-compete ruler. A batch/export strip closes
     the card. Statuses, 3/6 months, 90.00%, 24 months, 6 rows -> 4 issues,
@@ -18,15 +18,15 @@ hero 1440x576  (Pillow; zh/en x light/dark = 4 webp files)
 
 flow 1100x660  (hand-written SVG; light/dark = 2 files)
     A three-tier review bench, not a row of boxes:
-      01 CLAUSE BENCH  labor-contract.txt -> labor.check: nine clause rows,
+      01 CLAUSE BENCH  labor-contract.txt -> labor_check: nine clause rows,
                        each with two gates (keyword, concrete element) that
                        resolve into present / attention / missing.
       02 SCALES        the other three verdicts: a four-step staircase
                        (inclusive term months -> probation cap), the 80%
                        floor track compared in cents, and the 24-month
                        non-compete ruler.
-      03 ISSUE SHEET   employees.csv -> labor.batch: the four real issue
-                       rows as measured-vs-threshold, then labor.export's
+      03 ISSUE SHEET   employees.csv -> labor_batch: the four real issue
+                       rows as measured-vs-threshold, then labor_export's
                        receipt (safe filename, CSV, sha256, bytes).
     The measured/threshold cell of every issue row is recomputed from
     samples/quickstart/input/employees.csv and cross-checked against the
@@ -363,7 +363,7 @@ HERO = {
         meta_size=20, meta_baseline=400,
         foot="Apache-2.0 · PerryLink DSH plugin family",
         foot_size=17, foot_baseline=466,
-        panel_title="labor.check",
+        panel_title="labor_check",
         panel_sub="九项必备条款 · 关键词 → 具体要素 → 三态判定",
         counts=f"命中 {SUMMARY['present']} · 待补 {SUMMARY['attention']} · 缺失 {SUMMARY['missing']}",
         scale_names=["试用期上限", "试用期工资", "竞业限制"],
@@ -374,8 +374,8 @@ HERO = {
             f"{PAY_LOW} ÷ {PAY_HIGH} · 按分比较",
             ("按月补偿" if NC["compensation_mentioned"] else "未写按月补偿") + " · 期限 ≤ 2 年",
         ],
-        strip=[f"labor.batch · {BATCH_ROWS} 行 → {ISSUES} 个问题 · 已过期 {DUE['expired']} / 90 天内 {DUE['expiring']}",
-               f"labor.export · {EXP['rows']} 行 · {EXP['bytes']} B · sha256 {SHA_SHORT}"],
+        strip=[f"labor_batch · {BATCH_ROWS} 行 → {ISSUES} 个问题 · 已过期 {DUE['expired']} / 90 天内 {DUE['expiring']}",
+               f"labor_export · {EXP['rows']} 行 · {EXP['bytes']} B · sha256 {SHA_SHORT}"],
         body="cjk", bold="cjk_bold",
     ),
     "en": dict(
@@ -391,7 +391,7 @@ HERO = {
         meta_size=20, meta_baseline=444,
         foot="Apache-2.0 · PerryLink DSH plugin family",
         foot_size=17, foot_baseline=498,
-        panel_title="labor.check",
+        panel_title="labor_check",
         panel_sub="nine clauses · keyword → specific → status",
         counts=f"present {SUMMARY['present']} · attention {SUMMARY['attention']} · missing {SUMMARY['missing']}",
         scale_names=["PROBATION", "PROBATION PAY", "NON-COMPETE"],
@@ -402,8 +402,8 @@ HERO = {
             f"{PAY_LOW} / {PAY_HIGH} = {PAY_RATIO}",
             ("monthly comp" if NC["compensation_mentioned"] else "no monthly comp") + " · cap 24 mo",
         ],
-        strip=[f"labor.batch · {BATCH_ROWS} rows → {ISSUES} issues · expired {DUE['expired']} / expiring {DUE['expiring']}",
-               f"labor.export · {EXP['rows']} rows · {EXP['bytes']} B · sha256 {SHA_SHORT}"],
+        strip=[f"labor_batch · {BATCH_ROWS} rows → {ISSUES} issues · expired {DUE['expired']} / expiring {DUE['expiring']}",
+               f"labor_export · {EXP['rows']} rows · {EXP['bytes']} B · sha256 {SHA_SHORT}"],
         body="cjk", bold="cjk_bold",
     ),
 }
@@ -617,8 +617,8 @@ def flow_svg(skin_name: str) -> str:
     left, right = TIERS["left"], TIERS["right"]
     issues_box, receipt = TIERS["issues"], TIERS["receipt"]
     p: list[str] = [f'''<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="660" viewBox="0 0 1100 660" role="img" aria-labelledby="flowTitle flowDesc">
-<title id="flowTitle">dsh-labor-contract structure: a three-tier local review bench, nine clause gates, three measurement scales, and a batch issue sheet that labor.export writes as a sha256-stamped CSV</title>
-<desc id="flowDesc">Tier 01 clause bench: labor-contract.txt goes through labor.check (R0); each of the nine required clauses is tested twice, once for its keyword pattern and once for a concrete element, and lands on present, attention or missing; the quickstart fixture returns present 9, attention 0, missing 0. Tier 02 scales: the inclusive contract term in whole months picks the probation cap (under 3 months gives 0, 3 to 11 gives 1, 12 to 35 gives 2, 36 or more and open-ended give 6; fixture 36 months gives 6 against a 3-month probation), probation pay is compared in cents against the 80% floor (fixture 10800 of 12000 = 90.00%, so it passes), and the non-compete clause is measured against 24 months with a monthly-compensation prompt (fixture 24 months with compensation). Tier 03 issue sheet: employees.csv with seven columns and six rows goes through labor.batch (R0) with as_of 2026-11-02 and yields four issues, each shown as measured versus threshold; labor.export (R1) writes them as RFC 4180 CSV under $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv, returning 4 rows, 566 bytes and a sha256 receipt. Everything is local: no network, no model call, not legal advice.</desc>
+<title id="flowTitle">dsh-labor-contract structure: a three-tier local review bench, nine clause gates, three measurement scales, and a batch issue sheet that labor_export writes as a sha256-stamped CSV</title>
+<desc id="flowDesc">Tier 01 clause bench: labor-contract.txt goes through labor_check (R0); each of the nine required clauses is tested twice, once for its keyword pattern and once for a concrete element, and lands on present, attention or missing; the quickstart fixture returns present 9, attention 0, missing 0. Tier 02 scales: the inclusive contract term in whole months picks the probation cap (under 3 months gives 0, 3 to 11 gives 1, 12 to 35 gives 2, 36 or more and open-ended give 6; fixture 36 months gives 6 against a 3-month probation), probation pay is compared in cents against the 80% floor (fixture 10800 of 12000 = 90.00%, so it passes), and the non-compete clause is measured against 24 months with a monthly-compensation prompt (fixture 24 months with compensation). Tier 03 issue sheet: employees.csv with seven columns and six rows goes through labor_batch (R0) with as_of 2026-11-02 and yields four issues, each shown as measured versus threshold; labor_export (R1) writes them as RFC 4180 CSV under $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv, returning 4 rows, 566 bytes and a sha256 receipt. Everything is local: no network, no model call, not legal advice.</desc>
 <defs>
   <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
     <stop offset="0" stop-color="{s['bg_from']}"/>
@@ -648,7 +648,7 @@ def flow_svg(skin_name: str) -> str:
 
     # --------------------------------------------------- 01 clause bench
     p.append(srect(*left, s["zone"], r=20, stroke=s["edge"]))
-    p.append(svg_text(64, 142, "01  CLAUSE BENCH · labor.check · R0", 12, "mono",
+    p.append(svg_text(64, 142, "01  CLAUSE BENCH · labor_check · R0", 12, "mono",
                       s["accent"], weight=700, ls=0.6, budget=420, tag="c-eyebrow"))
     p.append(svg_text(64, 164, "INPUT labor-contract.txt · plain text · read-only",
                       11.5, "mono", s["sub"], budget=560, tag="c-input"))
@@ -739,7 +739,7 @@ def flow_svg(skin_name: str) -> str:
 
     # ---------------------------------------------------- 03 issue sheet
     p.append(srect(*issues_box, s["zone"], r=20, stroke=s["edge"]))
-    p.append(svg_text(64, 438, "03  ISSUE SHEET · labor.batch · R0", 12, "mono",
+    p.append(svg_text(64, 438, "03  ISSUE SHEET · labor_batch · R0", 12, "mono",
                       s["accent"], weight=700, ls=0.6, budget=340, tag="i-eyebrow"))
     p.append(svg_text(616, 438, f"due {DUE['expired']} / {DUE['expiring']}", 11,
                       "mono", s["faint"], anchor="end", budget=140, tag="i-due"))
@@ -760,9 +760,9 @@ def flow_svg(skin_name: str) -> str:
         p.append(svg_text(516, y, against, 13, "mono", s["danger"], budget=120,
                           tag=f"i-against{i}"))
 
-    # ------------------------------------------------ labor.export receipt
+    # ------------------------------------------------ labor_export receipt
     p.append(srect(*receipt, s["card"], r=20, stroke=s["edge"], filt=True))
-    p.append(svg_text(724, 438, "labor.export · R1", 12, "mono", s["accent"],
+    p.append(svg_text(724, 438, "labor_export · R1", 12, "mono", s["accent"],
                       weight=700, ls=0.6, budget=280, tag="e-eyebrow"))
     p.append(svg_text(724, 466, "labor-issues.csv", 14, "mono", s["text"],
                       weight=700, budget=300, tag="e-name"))
@@ -775,7 +775,7 @@ def flow_svg(skin_name: str) -> str:
     p.append(svg_text(724, 546, f"sha256 {EXP['sha256'][:12]}…", 11, "mono",
                       s["faint"], budget=300, tag="e-sha"))
 
-    # issues[] -> labor.export
+    # issues[] -> labor_export
     p.append(arrow(636, 485, 702, 485, s["accent"], 2, head=6))
     p.append(svg_text(669, 474, "issues[4]", 11, "mono", s["sub"], anchor="middle",
                       budget=64, tag="e-arrow"))

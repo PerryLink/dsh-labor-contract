@@ -39,36 +39,36 @@ async function main() {
     const tools = Object.fromEntries(createTools({ baseDir: path.join(tempDir, 'store') }).map((tool) => [tool.name, tool]))
     const exec = { callId: 'acceptance' }
 
-    const full = await tools['labor.check'].execute({ text: contractText }, exec)
-    const empty = await tools['labor.check'].execute({
+    const full = await tools['labor_check'].execute({ text: contractText }, exec)
+    const empty = await tools['labor_check'].execute({
       text: '劳动合同\n甲方：示范（合成）公司\n乙方：示例员工\n双方签订本合同。',
     }, exec)
-    const pro03 = await tools['labor.check'].execute({
+    const pro03 = await tools['labor_check'].execute({
       text: caseText('2026-01-01 至 2028-12-31', 6),
     }, exec)
-    const pro07 = await tools['labor.check'].execute({
+    const pro07 = await tools['labor_check'].execute({
       text: caseText('2026-01-01 至 2028-12-31', 7),
     }, exec)
-    const pro13 = await tools['labor.check'].execute({
+    const pro13 = await tools['labor_check'].execute({
       text: caseText('2026-01-01 至 2026-12-31', 3),
     }, exec)
-    const payAt = await tools['labor.check'].execute({
+    const payAt = await tools['labor_check'].execute({
       text: caseText('2026-01-01 至 2028-12-31', 3, '试用期工资为人民币 8000 元/月，转正后月工资为人民币 10000 元/月。'),
     }, exec)
-    const payBelow = await tools['labor.check'].execute({
+    const payBelow = await tools['labor_check'].execute({
       text: caseText('2026-01-01 至 2028-12-31', 3, '试用期工资为人民币 7999 元/月，转正后月工资为人民币 10000 元/月。'),
     }, exec)
-    const batch = await tools['labor.batch'].execute({ csv: employeeCsv, as_of: '2026-11-02' }, exec)
+    const batch = await tools['labor_batch'].execute({ csv: employeeCsv, as_of: '2026-11-02' }, exec)
     const dateCode = await errorCode(
-      tools['labor.batch'].execute({
+      tools['labor_batch'].execute({
         csv: `${HEADER}甲（合成）,工程师,2026-02-30,2026-12-31,1,8000,8000\n`,
         as_of: '2026-11-02',
       }, exec),
     )
     const pathCode = await errorCode(
-      tools['labor.export'].execute({ issues: [], filename: '../evil.csv' }, exec),
+      tools['labor_export'].execute({ issues: [], filename: '../evil.csv' }, exec),
     )
-    const exported = await tools['labor.export'].execute({ issues: batch.issues, filename: 'acceptance.csv' }, exec)
+    const exported = await tools['labor_export'].execute({ issues: batch.issues, filename: 'acceptance.csv' }, exec)
     const exportedText = readFileSync(exported.path, 'utf8')
     const exportOk = exported.sha256 === sha256(exportedText) && exported.bytes === Buffer.byteLength(exportedText, 'utf8')
 

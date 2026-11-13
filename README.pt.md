@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
-  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="Banner do dsh-labor-contract: à direita, o painel das nove cláusulas do labor.check (present 9, attention 0, missing 0) sobre três escalas — período de experiência 3 / 6 meses, salário de experiência 10800.00 / 12000.00 = 90.00% com o piso de 80% marcado, e uma régua de não concorrência de 24 / 24 meses; o rodapé do cartão resume labor.batch 6 linhas para 4 problemas (vencidos 1 / a vencer 1) e labor.export 4 linhas / 566 B / sha256 3fed842f...; os valores vêm de samples/quickstart/expected/result.json">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="Banner do dsh-labor-contract: à direita, o painel das nove cláusulas do labor_check (present 9, attention 0, missing 0) sobre três escalas — período de experiência 3 / 6 meses, salário de experiência 10800.00 / 12000.00 = 90.00% com o piso de 80% marcado, e uma régua de não concorrência de 24 / 24 meses; o rodapé do cartão resume labor_batch 6 linhas para 4 problemas (vencidos 1 / a vencer 1) e labor_export 4 linhas / 566 B / sha256 3fed842f...; os valores vêm de samples/quickstart/expected/result.json">
 </picture>
 
 # dsh-labor-contract
@@ -43,7 +43,7 @@ Ele verifica apenas **cobertura de cláusulas, datas e proporções**: tudo roda
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-labor-contract: uma bancada de revisão local de três níveis. 01 bancada de cláusulas — o contrato em texto simples e somente leitura passa pelo labor.check (R0); cada uma das nove cláusulas obrigatórias atravessa dois portões (palavra-chave e elemento concreto) até present / attention / missing (quickstart: 9 / 0 / 0). 02 escalas — a duração em meses completos inclusivos gera a escada do limite de experiência (menos de 3 dá 0, 3-11 dá 1, 12-35 dá 2, 36 ou mais e sem prazo determinado dão 6); o salário de experiência é comparado em centavos com o piso de 80% (1080000 deve ficar em ou acima de 960000, então exatamente 80% passa); a não concorrência é medida contra o teto de 24 meses com aviso de compensação mensal. 03 folha de problemas — employees.csv (7 colunas, 6 linhas, as_of 2026-11-02) passa pelo labor.batch (R0) e gera quatro problemas mostrados como medido versus limite; o labor.export (R1) grava essas 4 linhas como CSV RFC 4180 em $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv e devolve 566 B e um sha256. Tudo local: sem rede, sem chamadas a modelos, sem aconselhamento jurídico">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-labor-contract: uma bancada de revisão local de três níveis. 01 bancada de cláusulas — o contrato em texto simples e somente leitura passa pelo labor_check (R0); cada uma das nove cláusulas obrigatórias atravessa dois portões (palavra-chave e elemento concreto) até present / attention / missing (quickstart: 9 / 0 / 0). 02 escalas — a duração em meses completos inclusivos gera a escada do limite de experiência (menos de 3 dá 0, 3-11 dá 1, 12-35 dá 2, 36 ou mais e sem prazo determinado dão 6); o salário de experiência é comparado em centavos com o piso de 80% (1080000 deve ficar em ou acima de 960000, então exatamente 80% passa); a não concorrência é medida contra o teto de 24 meses com aviso de compensação mensal. 03 folha de problemas — employees.csv (7 colunas, 6 linhas, as_of 2026-11-02) passa pelo labor_batch (R0) e gera quatro problemas mostrados como medido versus limite; o labor_export (R1) grava essas 4 linhas como CSV RFC 4180 em $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv e devolve 566 B e um sha256. Tudo local: sem rede, sem chamadas a modelos, sem aconselhamento jurídico">
 </picture>
 
 ## Instalação em três passos
@@ -81,9 +81,9 @@ Os nomes das ferramentas são API estável; as descrições permanecem em inglê
 
 | Ferramenta | Propósito | Risco |
 |---|---|---|
-| `labor.check` | Um contrato: nove cláusulas obrigatórias + limite do período de experiência + salário de experiência a 80% + aviso de compensação por não concorrência | R0 (somente leitura) |
-| `labor.batch` | Lote CSV: período de experiência acima do limite, contratos vencidos / a vencer em 90 dias, salário de experiência abaixo de 80% | R0 (somente leitura) |
-| `labor.export` | Grava a lista de problemas como CSV com aspas; devolve caminho e sha256 | R1 (gravação local apenas em exports) |
+| `labor_check` | Um contrato: nove cláusulas obrigatórias + limite do período de experiência + salário de experiência a 80% + aviso de compensação por não concorrência | R0 (somente leitura) |
+| `labor_batch` | Lote CSV: período de experiência acima do limite, contratos vencidos / a vencer em 90 dias, salário de experiência abaixo de 80% | R0 (somente leitura) |
+| `labor_export` | Grava a lista de problemas como CSV com aspas; devolve caminho e sha256 | R1 (gravação local apenas em exports) |
 
 - **Nove cláusulas obrigatórias:** prazo, funções, local, jornada/descanso, salário, previdência, proteção do trabalho, rescisão e resolução de conflitos, cada uma com frase de evidência e `present` / `attention` / `missing`.
 - **Limite do período de experiência:** 0 / 1 / 2 / 6 meses por meses inteiros de contrato (com a data de fim incluída); devolve `unknown` em vez de adivinhar quando não consegue interpretar o prazo.
@@ -104,13 +104,13 @@ Ou chame a superfície de ferramentas diretamente:
 
 ```sh
 # 1) revisar um contrato
-#    superfície: labor.check({ text: "<corpo do contrato>" })
+#    superfície: labor_check({ text: "<corpo do contrato>" })
 
 # 2) revisão em lote
-#    superfície: labor.batch({ csv: "<texto CSV>", as_of: "2026-11-02" })
+#    superfície: labor_batch({ csv: "<texto CSV>", as_of: "2026-11-02" })
 
 # 3) exportar a lista de problemas
-#    superfície: labor.export({ issues: [...batch.issues], filename: "labor-issues.csv" })
+#    superfície: labor_export({ issues: [...batch.issues], filename: "labor-issues.csv" })
 ```
 
 Reproduza o exemplo incluído e compare com o arquivo dourado:
@@ -125,13 +125,13 @@ O exemplo é um contrato sintético de 36 meses mais seis funcionários sintéti
 
 ## Entrada
 
-- `labor.check`: um contrato de trabalho em **texto simples** (`.txt` ou corpo colado). Converta antes PDF, digitalizações ou DOCX com uma ferramenta de confiança; este pacote não faz OCR nem analisa documentos binários.
-- `labor.batch`: um CSV UTF-8 com o cabeçalho fixo
+- `labor_check`: um contrato de trabalho em **texto simples** (`.txt` ou corpo colado). Converta antes PDF, digitalizações ou DOCX com uma ferramenta de confiança; este pacote não faz OCR nem analisa documentos binários.
+- `labor_batch`: um CSV UTF-8 com o cabeçalho fixo
   `employee,position,contract_start,contract_end,probation_months,monthly_salary,probation_salary`.
   - `probation_salary` é opcional; sem ela a verificação dos 80% é ignorada.
   - As datas são `YYYY-MM-DD`; `contract_end` também aceita a palavra-chave chinesa para contrato por prazo indeterminado.
   - Os valores usam `1234.56`; sem `¥`, espaços ou unidades chinesas.
-- `labor.export`: um array de problemas (normalmente `issues` de `labor.batch`) e um nome de arquivo seguro.
+- `labor_export`: um array de problemas (normalmente `issues` de `labor_batch`) e um nome de arquivo seguro.
 - Todas as entradas são somente leitura.
 
 Valores aceitos de `contract_end`:
@@ -158,9 +158,9 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ## Saída
 
-- `labor.check`: `clauses` (9 itens, cada um `present` / `attention` / `missing` com frase de evidência e uma dica), `summary`, `term`, `probation`, `probation_pay`, `non_compete` e `disclaimer_zh`.
-- `labor.batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`.
-- `labor.export`: caminho do CSV, número de linhas, bytes e `sha256`, gravado em `$DSH_HOME/dsh-labor-contract/exports/`.
+- `labor_check`: `clauses` (9 itens, cada um `present` / `attention` / `missing` com frase de evidência e uma dica), `summary`, `term`, `probation`, `probation_pay`, `non_compete` e `disclaimer_zh`.
+- `labor_batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`.
+- `labor_export`: caminho do CSV, número de linhas, bytes e `sha256`, gravado em `$DSH_HOME/dsh-labor-contract/exports/`.
 - As datas são `YYYY-MM-DD`; o dinheiro é comparado em centavos inteiros para evitar desvios de ponto flutuante.
 
 ## Regras de decisão
@@ -193,7 +193,7 @@ Os limites usam meses inteiros inclusivos: 2026-01-01 a 2026-03-31 são 3 meses;
 
 ### Salário de experiência a 80%
 
-`labor.check` extrai o salário de experiência e o salário mensal acordado e compara em centavos: abaixo de 80% apenas quando `experiência × 100 < acordado × 80`; exatamente 80% passa. `labor.batch` aplica a mesma regra por linha. **O salário mínimo local é uma verificação separada que este pacote não conhece** — confira para a sua cidade.
+`labor_check` extrai o salário de experiência e o salário mensal acordado e compara em centavos: abaixo de 80% apenas quando `experiência × 100 < acordado × 80`; exatamente 80% passa. `labor_batch` aplica a mesma regra por linha. **O salário mínimo local é uma verificação separada que este pacote não conhece** — confira para a sua cidade.
 
 ### Aviso de não concorrência
 
@@ -221,11 +221,11 @@ Este plugin não tem chaves de configuração no nível do perfil (`cordis.patch
 
 | Parâmetro | Valor padrão | Significado |
 |---|---|---|
-| `text` | (obrigatório, `labor.check`) | Texto simples do contrato de trabalho; somente leitura, sem OCR |
-| `csv` | (obrigatório, `labor.batch`) | Texto CSV de contratos de funcionários, cabeçalho fixo, separado por vírgulas |
-| `as_of` | hoje | Data de referência de vencimento de `labor.batch`, `YYYY-MM-DD` |
-| `issues` | (obrigatório, `labor.export`) | Array de problemas, normalmente `issues` de `labor.batch` |
-| `filename` | derivado da data | Nome de arquivo de `labor.export`, apenas `[A-Za-z0-9._-]`; sempre em `$DSH_HOME/dsh-labor-contract/exports/` |
+| `text` | (obrigatório, `labor_check`) | Texto simples do contrato de trabalho; somente leitura, sem OCR |
+| `csv` | (obrigatório, `labor_batch`) | Texto CSV de contratos de funcionários, cabeçalho fixo, separado por vírgulas |
+| `as_of` | hoje | Data de referência de vencimento de `labor_batch`, `YYYY-MM-DD` |
+| `issues` | (obrigatório, `labor_export`) | Array de problemas, normalmente `issues` de `labor_batch` |
+| `filename` | derivado da data | Nome de arquivo de `labor_export`, apenas `[A-Za-z0-9._-]`; sempre em `$DSH_HOME/dsh-labor-contract/exports/` |
 
 ## FAQ
 
@@ -267,18 +267,18 @@ Compara os dois valores escritos no contrato, sem impostos, previdência ou desc
 <details>
 <summary>Ele envia contratos ou chama um modelo?</summary>
 
-Não. As três ferramentas são código local: sem rede, sem upload, sem chamadas a modelos. `labor.export` grava apenas em `$DSH_HOME/dsh-labor-contract/exports/`.
+Não. As três ferramentas são código local: sem rede, sem upload, sem chamadas a modelos. `labor_export` grava apenas em `$DSH_HOME/dsh-labor-contract/exports/`.
 
 </details>
 
 ## Permissões e dados
 
 - **Leitura:** o texto do contrato e o CSV de funcionários indicados pelo usuário (exemplo: `samples/quickstart/input/`); nada mais.
-- **Gravação:** apenas `$DSH_HOME/dsh-labor-contract/exports/` (`labor.export`); os arquivos de origem não são tocados.
+- **Gravação:** apenas `$DSH_HOME/dsh-labor-contract/exports/` (`labor_export`); os arquivos de origem não são tocados.
 - **Rede:** não.
 - **Sistemas externos:** nenhum.
 
-`labor.check` e `labor.batch` são **R0** (somente leitura). `labor.export` é **R1** (gravação local em `$DSH_HOME/dsh-labor-contract`). `DSH_LABOR_CONTRACT_HOME` pode sobrescrever a raiz de gravação local para testes; o padrão é exatamente `$DSH_HOME/dsh-labor-contract`.
+`labor_check` e `labor_batch` são **R0** (somente leitura). `labor_export` é **R1** (gravação local em `$DSH_HOME/dsh-labor-contract`). `DSH_LABOR_CONTRACT_HOME` pode sobrescrever a raiz de gravação local para testes; o padrão é exatamente `$DSH_HOME/dsh-labor-contract`.
 
 ## Limitações conhecidas
 
@@ -336,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Versão atual `0.1.0` · 31 testes passam (`node --test test/*.test.mjs`). As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; o banner hero é um webp de 1440x576 em zh/en x claro/escuro, o diagrama de estrutura é um SVG escrito à mão de 1100x660 nas variantes clara e escura, e seus números vêm do arquivo dourado do quickstart) e pode ser reexecutado a qualquer momento.
+Versão atual `0.2.0` · 32 testes passam (`node --test test/*.test.mjs`). As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; o banner hero é um webp de 1440x576 em zh/en x claro/escuro, o diagrama de estrutura é um SVG escrito à mão de 1100x660 nas variantes clara e escura, e seus números vêm do arquivo dourado do quickstart) e pode ser reexecutado a qualquer momento.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

@@ -11,7 +11,7 @@ const tools = Object.fromEntries(
   createTools({ baseDir: path.join(os.tmpdir(), 'dsh-labor-contract-unit') }).map((tool) => [tool.name, tool]),
 )
 const exec = { callId: 'labor-check-test' }
-const check = (text) => tools['labor.check'].execute({ text }, exec)
+const check = (text) => tools['labor_check'].execute({ text }, exec)
 const contract = (text) => `劳动合同\n${text}\n（合成测试文本）`
 
 test('the bundled synthetic contract covers all nine required clauses', async () => {

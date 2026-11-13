@@ -18,7 +18,7 @@ const nullableNumber = { oneOf: [{ type: 'number' }, { type: 'null' }] as const,
 
 export function createTools(deps: ToolDeps) {
   const check = defineTool({
-    name: 'labor.check',
+    name: 'labor_check',
     description:
       'Review one labor contract text: coverage of nine required clauses (term, duties, location, hours, pay, social insurance, protection, termination, dispute), probation cap by contract term, probation pay vs the 80% floor, and a non-compete compensation prompt. Read-only; flags only, not legal advice.',
     parameters: {
@@ -111,7 +111,7 @@ export function createTools(deps: ToolDeps) {
             : `${value.probation.months}m / limit ${value.probation.limit_months ?? '?'}m`
         const ratio = value.probation_pay.ratio_pct === null ? 'n/a' : `${value.probation_pay.ratio_pct.toFixed(2)}%`
         return text(
-          `labor.check: clauses ${value.summary.present} present / ${value.summary.attention} attention / ${value.summary.missing} missing; probation ${value.probation.status} (${probation}); pay ${value.probation_pay.status} (${ratio}); non-compete ${value.non_compete.status}`,
+          `labor_check: clauses ${value.summary.present} present / ${value.summary.attention} attention / ${value.summary.missing} missing; probation ${value.probation.status} (${probation}); pay ${value.probation_pay.status} (${ratio}); non-compete ${value.non_compete.status}`,
         )
       },
     },
@@ -121,7 +121,7 @@ export function createTools(deps: ToolDeps) {
   })
 
   const batch = defineTool({
-    name: 'labor.batch',
+    name: 'labor_batch',
     description:
       'Batch-check a labor-contract CSV (employee,position,contract_start,contract_end,probation_months,monthly_salary[,probation_salary]): probation over the legal cap, contract expired / expiring within 90 days of as_of, and probation pay below 80% of the agreed wage. Read-only; issues only.',
     parameters: {
@@ -179,7 +179,7 @@ export function createTools(deps: ToolDeps) {
       },
       render: (_args, value: BatchResult) =>
         text(
-          `labor.batch: ${value.rows} row(s), ${value.issues.length} issue(s), ${value.summary.expired} expired / ${value.summary.expiring} expiring as of ${value.as_of}`,
+          `labor_batch: ${value.rows} row(s), ${value.issues.length} issue(s), ${value.summary.expired} expired / ${value.summary.expiring} expiring as of ${value.as_of}`,
         ),
     },
     async execute(args) {
@@ -188,7 +188,7 @@ export function createTools(deps: ToolDeps) {
   })
 
   const exportIssues = defineTool({
-    name: 'labor.export',
+    name: 'labor_export',
     description:
       'Write a labor issue list as quoted UTF-8 CSV under $DSH_HOME/dsh-labor-contract/exports; returns path, row count, bytes and sha256. Local write only; the filename must be one safe component.',
     parameters: {
@@ -220,7 +220,7 @@ export function createTools(deps: ToolDeps) {
           sha256: { type: 'string', required: true },
         },
       },
-      render: (_args, value: { path: string; rows: number }) => text(`labor.export: ${value.rows} row(s) -> ${value.path}`),
+      render: (_args, value: { path: string; rows: number }) => text(`labor_export: ${value.rows} row(s) -> ${value.path}`),
     },
     async execute(args) {
       const rows = args.issues.map((issue) => [

@@ -30,4 +30,4 @@ The reporting date is fixed at `2026-11-02` in `run.mjs`, so expiry counts are d
 `--check` output; update `screenshots.json` hashes when they change.
 
 The review is a clause/date/ratio check, **not legal advice**. See the disclaimer returned by
-`labor.check`.
+`labor_check`.

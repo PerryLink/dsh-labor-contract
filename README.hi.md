@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-hero-en-dark.webp">
-  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract बैनर: दाईं ओर labor.check का नौ-क्लॉज़ बोर्ड (present 9, attention 0, missing 0) और उसके नीचे तीन मापदंड — परिवीक्षा 3 / 6 महीने, परिवीक्षा वेतन 10800.00 / 12000.00 = 90.00% जिसमें 80% की सीमा अंकित है, और 24 / 24 महीने की गैर-प्रतिस्पर्धा रेखा; कार्ड के नीचे labor.batch 6 पंक्तियाँ से 4 मुद्दे (समाप्त 1 / समाप्त होने वाले 1) और labor.export 4 पंक्तियाँ / 566 B / sha256 3fed842f...; मान samples/quickstart/expected/result.json से लिए गए हैं">
+  <img src="docs/assets/dsh-labor-contract-hero-en-light.webp" width="100%" alt="dsh-labor-contract बैनर: दाईं ओर labor_check का नौ-क्लॉज़ बोर्ड (present 9, attention 0, missing 0) और उसके नीचे तीन मापदंड — परिवीक्षा 3 / 6 महीने, परिवीक्षा वेतन 10800.00 / 12000.00 = 90.00% जिसमें 80% की सीमा अंकित है, और 24 / 24 महीने की गैर-प्रतिस्पर्धा रेखा; कार्ड के नीचे labor_batch 6 पंक्तियाँ से 4 मुद्दे (समाप्त 1 / समाप्त होने वाले 1) और labor_export 4 पंक्तियाँ / 566 B / sha256 3fed842f...; मान samples/quickstart/expected/result.json से लिए गए हैं">
 </picture>
 
 # dsh-labor-contract
@@ -43,7 +43,7 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-labor-contract-flow-v5-dark.svg">
-  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract की संरचना: तीन स्तरों वाली लोकल समीक्षा बेंच। 01 क्लॉज़ बेंच — सादा केवल-पठनीय अनुबंध टेक्स्ट labor.check (R0) से गुज़रता है; नौ अनिवार्य क्लॉज़ में से हर एक दो द्वार (कीवर्ड और ठोस तत्व) पार करके present / attention / missing पर पहुँचता है (quickstart: 9 / 0 / 0)। 02 मापदंड — समावेशी पूरे महीनों की अवधि परिवीक्षा-सीमा की सीढ़ी देती है (3 से कम → 0, 3-11 → 1, 12-35 → 2, 36 या अधिक और अनिश्चित अवधि → 6); परिवीक्षा वेतन की तुलना सेंट में 80% फ़्लोर से होती है (1080000 को 960000 या उससे ऊपर रहना है, इसलिए ठीक 80% भी पास होता है); गैर-प्रतिस्पर्धा खंड 24 महीने की सीमा के सामने मापा जाता है और मासिक मुआवज़े का संकेत दिया जाता है। 03 मुद्दा पत्रक — employees.csv (7 कॉलम, 6 पंक्तियाँ, as_of 2026-11-02) labor.batch (R0) से चार मुद्दे बनाता है, हर एक मापा-बनाम-सीमा के रूप में; labor.export (R1) उन 4 पंक्तियों को RFC 4180 CSV के रूप में $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv में लिखता है और 566 B तथा sha256 लौटाता है। सब कुछ लोकल: बिना नेटवर्क, बिना मॉडल कॉल, कानूनी सलाह नहीं">
+  <img src="docs/assets/dsh-labor-contract-flow-v5-light.svg" width="100%" alt="dsh-labor-contract की संरचना: तीन स्तरों वाली लोकल समीक्षा बेंच। 01 क्लॉज़ बेंच — सादा केवल-पठनीय अनुबंध टेक्स्ट labor_check (R0) से गुज़रता है; नौ अनिवार्य क्लॉज़ में से हर एक दो द्वार (कीवर्ड और ठोस तत्व) पार करके present / attention / missing पर पहुँचता है (quickstart: 9 / 0 / 0)। 02 मापदंड — समावेशी पूरे महीनों की अवधि परिवीक्षा-सीमा की सीढ़ी देती है (3 से कम → 0, 3-11 → 1, 12-35 → 2, 36 या अधिक और अनिश्चित अवधि → 6); परिवीक्षा वेतन की तुलना सेंट में 80% फ़्लोर से होती है (1080000 को 960000 या उससे ऊपर रहना है, इसलिए ठीक 80% भी पास होता है); गैर-प्रतिस्पर्धा खंड 24 महीने की सीमा के सामने मापा जाता है और मासिक मुआवज़े का संकेत दिया जाता है। 03 मुद्दा पत्रक — employees.csv (7 कॉलम, 6 पंक्तियाँ, as_of 2026-11-02) labor_batch (R0) से चार मुद्दे बनाता है, हर एक मापा-बनाम-सीमा के रूप में; labor_export (R1) उन 4 पंक्तियों को RFC 4180 CSV के रूप में $DSH_HOME/dsh-labor-contract/exports/labor-issues.csv में लिखता है और 566 B तथा sha256 लौटाता है। सब कुछ लोकल: बिना नेटवर्क, बिना मॉडल कॉल, कानूनी सलाह नहीं">
 </picture>
 
 ## तीन चरणों में शुरुआत
@@ -81,9 +81,9 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 | टूल | उद्देश्य | जोखिम |
 |---|---|---|
-| `labor.check` | एक अनुबंध: नौ अनिवार्य क्लॉज़ + परिवीक्षा सीमा + परिवीक्षा वेतन 80% + गैर-प्रतिस्पर्धा मुआवज़ा संकेत | R0 (केवल-पठनीय) |
-| `labor.batch` | CSV बैच: सीमा से अधिक परिवीक्षा, समाप्त / 90 दिनों में समाप्त होने वाले अनुबंध, 80% से कम परिवीक्षा वेतन | R0 (केवल-पठनीय) |
-| `labor.export` | समस्या सूची को उद्धरण-सहित CSV में लिखें; पथ और sha256 लौटाएँ | R1 (केवल exports में लोकल लेखन) |
+| `labor_check` | एक अनुबंध: नौ अनिवार्य क्लॉज़ + परिवीक्षा सीमा + परिवीक्षा वेतन 80% + गैर-प्रतिस्पर्धा मुआवज़ा संकेत | R0 (केवल-पठनीय) |
+| `labor_batch` | CSV बैच: सीमा से अधिक परिवीक्षा, समाप्त / 90 दिनों में समाप्त होने वाले अनुबंध, 80% से कम परिवीक्षा वेतन | R0 (केवल-पठनीय) |
+| `labor_export` | समस्या सूची को उद्धरण-सहित CSV में लिखें; पथ और sha256 लौटाएँ | R1 (केवल exports में लोकल लेखन) |
 
 - **नौ अनिवार्य क्लॉज़:** अवधि, कर्तव्य, स्थान, कार्यसमय/विश्राम, वेतन, सामाजिक बीमा, श्रम सुरक्षा, समाप्ति और विवाद समाधान — प्रत्येक साक्ष्य वाक्य तथा `present` / `attention` / `missing` के साथ।
 - **परिवीक्षा सीमा:** अनुबंध के पूर्ण महीनों (अंतिम तिथि सहित) के अनुसार 0 / 1 / 2 / 6 महीने; अवधि समझ न आने पर अनुमान के बजाय `unknown` लौटाता है।
@@ -104,13 +104,13 @@ dsh plugin --profile <profile> add dsh-labor-contract
 
 ```sh
 # 1) एक अनुबंध की समीक्षा
-#    टूल सतह: labor.check({ text: "<अनुबंध का मुख्य भाग>" })
+#    टूल सतह: labor_check({ text: "<अनुबंध का मुख्य भाग>" })
 
 # 2) बैच जाँच
-#    टूल सतह: labor.batch({ csv: "<CSV टेक्स्ट>", as_of: "2026-11-02" })
+#    टूल सतह: labor_batch({ csv: "<CSV टेक्स्ट>", as_of: "2026-11-02" })
 
 # 3) समस्या सूची एक्सपोर्ट करें
-#    टूल सतह: labor.export({ issues: [...batch.issues], filename: "labor-issues.csv" })
+#    टूल सतह: labor_export({ issues: [...batch.issues], filename: "labor-issues.csv" })
 ```
 
 साथ दिया नमूना दोबारा चलाएँ और गोल्डन फ़ाइल से तुलना करें:
@@ -125,13 +125,13 @@ node samples/quickstart/run.mjs --check
 
 ## इनपुट
 
-- `labor.check`: एक श्रम अनुबंध **सादे टेक्स्ट** में (`.txt` या चिपकाया हुआ मुख्य भाग)। PDF, स्कैन या DOCX को पहले किसी भरोसेमंद टूल से टेक्स्ट में बदलें; यह पैकेज OCR नहीं करता और बाइनरी दस्तावेज़ नहीं पढ़ता।
-- `labor.batch`: एक UTF-8 CSV जिसका हेडर निश्चित है
+- `labor_check`: एक श्रम अनुबंध **सादे टेक्स्ट** में (`.txt` या चिपकाया हुआ मुख्य भाग)। PDF, स्कैन या DOCX को पहले किसी भरोसेमंद टूल से टेक्स्ट में बदलें; यह पैकेज OCR नहीं करता और बाइनरी दस्तावेज़ नहीं पढ़ता।
+- `labor_batch`: एक UTF-8 CSV जिसका हेडर निश्चित है
   `employee,position,contract_start,contract_end,probation_months,monthly_salary,probation_salary`।
   - `probation_salary` वैकल्पिक है; इसके बिना 80% जाँच छूट जाती है।
   - तारीख़ें `YYYY-MM-DD` हैं; `contract_end` में अनिश्चितकालीन अनुबंध के लिए चीनी कीवर्ड भी स्वीकार है।
   - राशि `1234.56` की तरह; `¥`, स्पेस या चीनी इकाइयाँ नहीं।
-- `labor.export`: समस्याओं की सरणी (सामान्यतः `labor.batch` का `issues`) और एक सुरक्षित फ़ाइल नाम।
+- `labor_export`: समस्याओं की सरणी (सामान्यतः `labor_batch` का `issues`) और एक सुरक्षित फ़ाइल नाम।
 - सभी इनपुट केवल-पठनीय हैं।
 
 `contract_end` के स्वीकार्य मान:
@@ -158,9 +158,9 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ## आउटपुट
 
-- `labor.check`: `clauses` (9 आइटम, प्रत्येक `present` / `attention` / `missing` + साक्ष्य वाक्य + संकेत), `summary`, `term`, `probation`, `probation_pay`, `non_compete` और `disclaimer_zh`।
-- `labor.batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`।
-- `labor.export`: CSV पथ, पंक्ति संख्या, बाइट्स और `sha256`, `$DSH_HOME/dsh-labor-contract/exports/` में लिखा गया।
+- `labor_check`: `clauses` (9 आइटम, प्रत्येक `present` / `attention` / `missing` + साक्ष्य वाक्य + संकेत), `summary`, `term`, `probation`, `probation_pay`, `non_compete` और `disclaimer_zh`।
+- `labor_batch`: `as_of`, `rows`, `issues`, `due.expired` / `due.expiring`, `summary.by_code`।
+- `labor_export`: CSV पथ, पंक्ति संख्या, बाइट्स और `sha256`, `$DSH_HOME/dsh-labor-contract/exports/` में लिखा गया।
 - सभी तारीख़ें `YYYY-MM-DD`; फ़्लोटिंग-पॉइंट त्रुटि से बचने के लिए पैसा पूर्ण पैसों में तुलना किया जाता है।
 
 ## निर्णय नियम
@@ -193,7 +193,7 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 ### परिवीक्षा वेतन 80%
 
-`labor.check` परिवीक्षा वेतन और तय मासिक वेतन निकालकर पैसों में तुलना करता है: 80% से कम केवल तब जब `परिवीक्षा × 100 < तय × 80`; ठीक 80% पास होता है। `labor.batch` हर पंक्ति पर वही नियम लगाता है। **स्थानीय न्यूनतम वेतन एक अलग जाँच है जो यह पैकेज नहीं जान सकता** — अपने शहर के लिए उसे अलग से जाँचें।
+`labor_check` परिवीक्षा वेतन और तय मासिक वेतन निकालकर पैसों में तुलना करता है: 80% से कम केवल तब जब `परिवीक्षा × 100 < तय × 80`; ठीक 80% पास होता है। `labor_batch` हर पंक्ति पर वही नियम लगाता है। **स्थानीय न्यूनतम वेतन एक अलग जाँच है जो यह पैकेज नहीं जान सकता** — अपने शहर के लिए उसे अलग से जाँचें।
 
 ### गैर-प्रतिस्पर्धा संकेत
 
@@ -221,11 +221,11 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 
 | पैरामीटर | डिफ़ॉल्ट | अर्थ |
 |---|---|---|
-| `text` | (आवश्यक, `labor.check`) | श्रम अनुबंध का सादा टेक्स्ट; केवल-पठनीय, OCR नहीं |
-| `csv` | (आवश्यक, `labor.batch`) | कर्मचारी अनुबंध CSV टेक्स्ट, निश्चित हेडर, कॉमा से अलग |
-| `as_of` | आज | `labor.batch` की समाप्ति संदर्भ तिथि, `YYYY-MM-DD` |
-| `issues` | (आवश्यक, `labor.export`) | समस्याओं की सरणी, सामान्यतः `labor.batch` का `issues` |
-| `filename` | तिथि से व्युत्पन्न | `labor.export` फ़ाइल नाम, केवल `[A-Za-z0-9._-]`; सदैव `$DSH_HOME/dsh-labor-contract/exports/` में |
+| `text` | (आवश्यक, `labor_check`) | श्रम अनुबंध का सादा टेक्स्ट; केवल-पठनीय, OCR नहीं |
+| `csv` | (आवश्यक, `labor_batch`) | कर्मचारी अनुबंध CSV टेक्स्ट, निश्चित हेडर, कॉमा से अलग |
+| `as_of` | आज | `labor_batch` की समाप्ति संदर्भ तिथि, `YYYY-MM-DD` |
+| `issues` | (आवश्यक, `labor_export`) | समस्याओं की सरणी, सामान्यतः `labor_batch` का `issues` |
+| `filename` | तिथि से व्युत्पन्न | `labor_export` फ़ाइल नाम, केवल `[A-Za-z0-9._-]`; सदैव `$DSH_HOME/dsh-labor-contract/exports/` में |
 
 ## FAQ
 
@@ -267,18 +267,18 @@ employee,position,contract_start,contract_end,probation_months,monthly_salary,pr
 <details>
 <summary>क्या यह अनुबंध अपलोड करता है या मॉडल बुलाता है?</summary>
 
-नहीं। तीनों टूल लोकल कोड हैं: बिना नेटवर्क, बिना अपलोड, बिना मॉडल कॉल। `labor.export` केवल `$DSH_HOME/dsh-labor-contract/exports/` में लिखता है।
+नहीं। तीनों टूल लोकल कोड हैं: बिना नेटवर्क, बिना अपलोड, बिना मॉडल कॉल। `labor_export` केवल `$DSH_HOME/dsh-labor-contract/exports/` में लिखता है।
 
 </details>
 
 ## अनुमतियाँ और डेटा
 
 - **पढ़ना:** उपयोगकर्ता द्वारा बताया गया अनुबंध टेक्स्ट और कर्मचारी CSV (नमूना: `samples/quickstart/input/`); इसके अलावा कुछ नहीं।
-- **लिखना:** केवल `$DSH_HOME/dsh-labor-contract/exports/` (`labor.export`); स्रोत फ़ाइलें अपरिवर्तित रहती हैं।
+- **लिखना:** केवल `$DSH_HOME/dsh-labor-contract/exports/` (`labor_export`); स्रोत फ़ाइलें अपरिवर्तित रहती हैं।
 - **नेटवर्क:** नहीं।
 - **बाहरी सिस्टम:** कोई नहीं।
 
-`labor.check` और `labor.batch` **R0** (केवल-पठनीय) हैं। `labor.export` **R1** (केवल `$DSH_HOME/dsh-labor-contract` में लोकल लेखन) है। परीक्षण के लिए `DSH_LABOR_CONTRACT_HOME` लोकल लेखन रूट बदल सकता है; डिफ़ॉल्ट ठीक `$DSH_HOME/dsh-labor-contract` है।
+`labor_check` और `labor_batch` **R0** (केवल-पठनीय) हैं। `labor_export` **R1** (केवल `$DSH_HOME/dsh-labor-contract` में लोकल लेखन) है। परीक्षण के लिए `DSH_LABOR_CONTRACT_HOME` लोकल लेखन रूट बदल सकता है; डिफ़ॉल्ट ठीक `$DSH_HOME/dsh-labor-contract` है।
 
 ## ज्ञात सीमाएँ
 
@@ -336,7 +336,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-वर्तमान संस्करण `0.1.0` · 31 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python/Pillow; hero बैनर 1440x576 का zh/en x हल्का/गहरा webp है, संरचना आरेख 1100x660 का हाथ से लिखा गया SVG है जो हल्के और गहरे दोनों रूपों में आता है, और उसके आँकड़े quickstart गोल्डन फ़ाइल से पढ़े जाते हैं) और कभी भी दोबारा चलाई जा सकती हैं।
+वर्तमान संस्करण `0.2.0` · 32 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python/Pillow; hero बैनर 1440x576 का zh/en x हल्का/गहरा webp है, संरचना आरेख 1100x660 का हाथ से लिखा गया SVG है जो हल्के और गहरे दोनों रूपों में आता है, और उसके आँकड़े quickstart गोल्डन फ़ाइल से पढ़े जाते हैं) और कभी भी दोबारा चलाई जा सकती हैं।
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

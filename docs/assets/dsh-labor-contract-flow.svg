@@ -6,7 +6,7 @@
     <text x="135" y="124" text-anchor="middle" fill="#9fb3d9">9 clauses · 6 employees</text>
 
     <rect x="355" y="70" width="210" height="80" rx="14" fill="#141b30" stroke="#6ea8fe" stroke-width="2"/>
-    <text x="460" y="100" text-anchor="middle" font-weight="700">labor.check · labor.batch</text>
+    <text x="460" y="100" text-anchor="middle" font-weight="700">labor_check · labor_batch</text>
     <text x="460" y="124" text-anchor="middle" fill="#9fb3d9">probation · 80% · expiry</text>
 
     <rect x="680" y="70" width="210" height="80" rx="14" fill="#141b30" stroke="#3fb950" stroke-width="2"/>
