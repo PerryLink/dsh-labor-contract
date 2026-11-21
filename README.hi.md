@@ -121,6 +121,11 @@ node samples/quickstart/run.mjs --check
 
 ![dsh-labor-contract quickstart का वास्तविक टर्मिनल आउटपुट](docs/assets/quickstart.png)
 
+![dsh-labor-contract quickstart का वास्तविक टर्मिनल आउटपुट](docs/assets/dsh-labor-contract-demo.gif)
+
+*उसी असली रन का एनिमेटेड संस्करण।*
+
+
 नमूना एक सिंथेटिक 36-महीने का अनुबंध और छह सिंथेटिक कर्मचारी हैं: नौ क्लॉज़ सभी मिले; परिवीक्षा 3 महीने (सीमा 6 महीने); परिवीक्षा वेतन 10800 / 12000 = 90%; दो वर्ष की गैर-प्रतिस्पर्धा और मासिक मुआवज़ा। बैच चार समस्याएँ देता है: एक सीमा से अधिक परिवीक्षा, एक समाप्त अनुबंध, एक 79.99% परिवीक्षा वेतन, और एक अनुबंध जो 74 दिनों में समाप्त होगा। `samples/quickstart/expected/result.json` `node samples/quickstart/run.mjs --json` का वास्तविक आउटपुट है, हाथ से लिखा नहीं; स्क्रीनशॉट `--check` के वास्तविक टर्मिनल आउटपुट से है (कच्चा कैप्चर [`docs/assets/quickstart.log`](docs/assets/quickstart.log) में)।
 
 ## इनपुट

@@ -121,6 +121,11 @@ node samples/quickstart/run.mjs --check
 
 ![Salida real de terminal del quickstart de dsh-labor-contract](docs/assets/quickstart.png)
 
+![Salida real de terminal del quickstart de dsh-labor-contract](docs/assets/dsh-labor-contract-demo.gif)
+
+*La versión animada de la misma ejecución.*
+
+
 El ejemplo es un contrato sintético de 36 meses más seis empleados sintéticos: las nueve cláusulas aparecen; periodo de prueba de 3 meses (límite 6 meses); salario de prueba 10800 / 12000 = 90%; no competencia de dos años con compensación mensual. El lote devuelve cuatro incidencias: un periodo de prueba por encima del límite, un contrato vencido, un salario de prueba del 79,99% y un contrato que vence en 74 días. `samples/quickstart/expected/result.json` es la salida real de `node samples/quickstart/run.mjs --json`, no escrita a mano; la captura es la salida real de terminal de `--check` (captura cruda en [`docs/assets/quickstart.log`](docs/assets/quickstart.log)).
 
 ## Entrada

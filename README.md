@@ -119,6 +119,11 @@ node samples/quickstart/run.mjs --check
 
 ![dsh-labor-contract quickstart 真实运行输出](docs/assets/quickstart.png)
 
+![dsh-labor-contract quickstart 真实运行输出](docs/assets/dsh-labor-contract-demo.gif)
+
+*同一段真实运行的动图版本。*
+
+
 样例是一份 36 个月的合成合同 + 6 名合成员工：9 项条款全部命中；试用期 3 个月（上限 6 个月）；试用期工资 10800 / 12000 = 90%；竞业限制 2 年且有补偿。批量结果 4 个问题：1 个试用期超限、1 个合同已到期、1 个试用期工资 79.99%、1 个 74 天后到期。金标 `samples/quickstart/expected/result.json` 由 `node samples/quickstart/run.mjs --json` 真实产生，不是手写；截图取自 `--check` 的真实终端输出（原始捕获见 [`docs/assets/quickstart.log`](docs/assets/quickstart.log)）。
 
 ## 输入

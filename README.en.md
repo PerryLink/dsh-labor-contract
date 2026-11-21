@@ -121,6 +121,11 @@ node samples/quickstart/run.mjs --check
 
 ![dsh-labor-contract quickstart terminal output](docs/assets/quickstart.png)
 
+![dsh-labor-contract quickstart terminal output](docs/assets/dsh-labor-contract-demo.gif)
+
+*The animated version of the same run.*
+
+
 The sample is one synthetic 36-month contract plus six synthetic employees: all nine clauses hit; a 3-month probation (cap 6 months); probation pay 10800 / 12000 = 90%; a two-year non-compete with monthly compensation. The batch reports four issues: one over-cap probation, one expired contract, one 79.99% probation wage, and one contract expiring in 74 days. `samples/quickstart/expected/result.json` is the real stdout of `node samples/quickstart/run.mjs --json`, not hand-written; the screenshot is the real `--check` terminal output (raw capture in [`docs/assets/quickstart.log`](docs/assets/quickstart.log)).
 
 ## Input
