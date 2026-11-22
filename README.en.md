@@ -342,7 +342,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Current version `0.2.1` · 32 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
+Current version `0.2.2` · 32 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Labor contract",
+    "description": "Turn one labor-contract text and one employee CSV into a reviewable issue list: missing required clauses, an over-cap probation, probation pay below 80%, and contracts expired or expiring soon — then export the list as CSV."
+  }
+}

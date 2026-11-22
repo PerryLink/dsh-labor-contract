@@ -1,6 +1,6 @@
 {
   "name": "dsh-labor-contract",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Review a labor contract's required clauses, probation cap and probation pay ratio; batch-check contract dates and export an issue list. Local only, not legal advice.",
   "type": "module",
   "main": "./lib/plugin/index.js",
@@ -9,7 +9,8 @@
     ".": {
       "types": "./lib/plugin/index.d.ts",
       "default": "./lib/plugin/index.js"
-    }
+    },
+    "./locale/*.json": "./locale/*.json"
   },
   "files": [
     "lib",
@@ -25,7 +26,9 @@
     "screenshots.json",
     "LICENSE",
     "NOTICE",
-    "THIRD-PARTY-NOTICES"
+    "THIRD-PARTY-NOTICES",
+    "locale/*.json",
+    "icon.svg"
   ],
   "dsh": {
     "bundle": {
@@ -98,5 +101,10 @@
     "@deepseek-ai/dsh-tools": {
       "optional": true
     }
+  },
+  "icon": "icon.svg",
+  "author": {
+    "name": "PerryLink",
+    "url": "https://github.com/PerryLink"
   }
 }

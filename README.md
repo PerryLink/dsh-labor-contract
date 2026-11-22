@@ -333,7 +333,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-当前版本 `0.2.1` · 32 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
+当前版本 `0.2.2` · 32 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
 
 Topics：`deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 
