@@ -11,6 +11,8 @@
 
 HR और कानूनी संचालन के लिए पूरी तरह लोकल अनुबंध समीक्षा प्लगइन: नौ अनिवार्य क्लॉज़, परिवीक्षा अवधि की सीमा, परिवीक्षा वेतन का 80% फ़्लोर, बैच में समाप्ति और गैर-प्रतिस्पर्धा मुआवज़े का संकेत, तथा sha256 वाला CSV एक्सपोर्ट — बिना नेटवर्क, बिना मॉडल कॉल, कानूनी सलाह नहीं।
 
+अंतिम सत्यापन: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [इंस्टॉल](#तीन-चरणों-में-शुरुआत) · [कॉन्फ़िगरेशन](#कॉन्फ़िगरेशन) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -124,7 +126,6 @@ node samples/quickstart/run.mjs --check
 ![dsh-labor-contract quickstart का वास्तविक टर्मिनल आउटपुट](docs/assets/dsh-labor-contract-demo.gif)
 
 *उसी असली रन का एनिमेटेड संस्करण।*
-
 
 नमूना एक सिंथेटिक 36-महीने का अनुबंध और छह सिंथेटिक कर्मचारी हैं: नौ क्लॉज़ सभी मिले; परिवीक्षा 3 महीने (सीमा 6 महीने); परिवीक्षा वेतन 10800 / 12000 = 90%; दो वर्ष की गैर-प्रतिस्पर्धा और मासिक मुआवज़ा। बैच चार समस्याएँ देता है: एक सीमा से अधिक परिवीक्षा, एक समाप्त अनुबंध, एक 79.99% परिवीक्षा वेतन, और एक अनुबंध जो 74 दिनों में समाप्त होगा। `samples/quickstart/expected/result.json` `node samples/quickstart/run.mjs --json` का वास्तविक आउटपुट है, हाथ से लिखा नहीं; स्क्रीनशॉट `--check` के वास्तविक टर्मिनल आउटपुट से है (कच्चा कैप्चर [`docs/assets/quickstart.log`](docs/assets/quickstart.log) में)।
 
@@ -341,7 +342,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-वर्तमान संस्करण `0.2.0` · 32 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python/Pillow; hero बैनर 1440x576 का zh/en x हल्का/गहरा webp है, संरचना आरेख 1100x660 का हाथ से लिखा गया SVG है जो हल्के और गहरे दोनों रूपों में आता है, और उसके आँकड़े quickstart गोल्डन फ़ाइल से पढ़े जाते हैं) और कभी भी दोबारा चलाई जा सकती हैं।
+वर्तमान संस्करण `0.2.1` · 32 परीक्षण पास (`node --test test/*.test.mjs`)। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप से बनती हैं (Python/Pillow; hero बैनर 1440x576 का zh/en x हल्का/गहरा webp है, संरचना आरेख 1100x660 का हाथ से लिखा गया SVG है जो हल्के और गहरे दोनों रूपों में आता है, और उसके आँकड़े quickstart गोल्डन फ़ाइल से पढ़े जाते हैं) और कभी भी दोबारा चलाई जा सकती हैं।
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

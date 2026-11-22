@@ -11,6 +11,8 @@
 
 A purely local contract review plugin for HR and legal ops: nine required clauses, the probation cap, the 80% probation-pay floor, batch expiry and a non-compete compensation prompt, with a sha256-stamped CSV export — no network, no model call, not legal advice.
 
+Last verified on DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Install](#three-step-setup) · [Configuration](#configuration) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -124,7 +126,6 @@ node samples/quickstart/run.mjs --check
 ![dsh-labor-contract quickstart terminal output](docs/assets/dsh-labor-contract-demo.gif)
 
 *The animated version of the same run.*
-
 
 The sample is one synthetic 36-month contract plus six synthetic employees: all nine clauses hit; a 3-month probation (cap 6 months); probation pay 10800 / 12000 = 90%; a two-year non-compete with monthly compensation. The batch reports four issues: one over-cap probation, one expired contract, one 79.99% probation wage, and one contract expiring in 74 days. `samples/quickstart/expected/result.json` is the real stdout of `node samples/quickstart/run.mjs --json`, not hand-written; the screenshot is the real `--check` terminal output (raw capture in [`docs/assets/quickstart.log`](docs/assets/quickstart.log)).
 
@@ -341,7 +342,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Current version `0.2.0` · 32 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
+Current version `0.2.1` · 32 tests pass (`node --test test/*.test.mjs`). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; the hero banner is a 1440x576 webp in zh/en x light/dark, the structure diagram is a hand-written 1100x660 SVG in light and dark, and its numbers are read from the quickstart golden file) and can be re-run at any time.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

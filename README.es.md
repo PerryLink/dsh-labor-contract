@@ -11,6 +11,8 @@
 
 Un plugin de revisión de contratos puramente local para RR. HH. y operaciones legales: nueve cláusulas obligatorias, límite del periodo de prueba, suelo del 80% del salario de prueba, vencimiento por lotes y aviso de compensación por no competencia, con exportación CSV firmada con sha256 — sin red, sin llamadas a modelos y sin asesoramiento jurídico.
 
+Última verificación: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Instalar](#instalación-en-tres-pasos) · [Configuración](#configuración) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -124,7 +126,6 @@ node samples/quickstart/run.mjs --check
 ![Salida real de terminal del quickstart de dsh-labor-contract](docs/assets/dsh-labor-contract-demo.gif)
 
 *La versión animada de la misma ejecución.*
-
 
 El ejemplo es un contrato sintético de 36 meses más seis empleados sintéticos: las nueve cláusulas aparecen; periodo de prueba de 3 meses (límite 6 meses); salario de prueba 10800 / 12000 = 90%; no competencia de dos años con compensación mensual. El lote devuelve cuatro incidencias: un periodo de prueba por encima del límite, un contrato vencido, un salario de prueba del 79,99% y un contrato que vence en 74 días. `samples/quickstart/expected/result.json` es la salida real de `node samples/quickstart/run.mjs --json`, no escrita a mano; la captura es la salida real de terminal de `--check` (captura cruda en [`docs/assets/quickstart.log`](docs/assets/quickstart.log)).
 
@@ -341,7 +342,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-Versión actual `0.2.0` · 32 pruebas superadas (`node --test test/*.test.mjs`). Las imágenes del README se generan programáticamente con [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; el banner hero es un webp de 1440x576 en zh/en x claro/oscuro, el diagrama de estructura es un SVG escrito a mano de 1100x660 en variantes clara y oscura, y sus cifras se leen del archivo dorado del quickstart) y puede reejecutarse en cualquier momento.
+Versión actual `0.2.1` · 32 pruebas superadas (`node --test test/*.test.mjs`). Las imágenes del README se generan programáticamente con [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python/Pillow; el banner hero es un webp de 1440x576 en zh/en x claro/oscuro, el diagrama de estructura es un SVG escrito a mano de 1100x660 en variantes clara y oscura, y sus cifras se leen del archivo dorado del quickstart) y puede reejecutarse en cualquier momento.
 
 Topics: `deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 

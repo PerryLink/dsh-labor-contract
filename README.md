@@ -11,6 +11,8 @@
 
 面向 HR 与法务的纯本地合同体检插件：九项必备条款覆盖、试用期上限、试用期工资 80% 下限、批量到期与竞业限制提示，最后导出一份带 sha256 的 CSV——不联网、不调用模型、不构成法律意见。
 
+最近一次核验：DeepSeek Harness `dsh-v0.2.3-alpha.1`（2026-11-22）。
+
 [安装](#三步上手) · [配置](#配置) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -122,7 +124,6 @@ node samples/quickstart/run.mjs --check
 ![dsh-labor-contract quickstart 真实运行输出](docs/assets/dsh-labor-contract-demo.gif)
 
 *同一段真实运行的动图版本。*
-
 
 样例是一份 36 个月的合成合同 + 6 名合成员工：9 项条款全部命中；试用期 3 个月（上限 6 个月）；试用期工资 10800 / 12000 = 90%；竞业限制 2 年且有补偿。批量结果 4 个问题：1 个试用期超限、1 个合同已到期、1 个试用期工资 79.99%、1 个 74 天后到期。金标 `samples/quickstart/expected/result.json` 由 `node samples/quickstart/run.mjs --json` 真实产生，不是手写；截图取自 `--check` 的真实终端输出（原始捕获见 [`docs/assets/quickstart.log`](docs/assets/quickstart.log)）。
 
@@ -332,7 +333,7 @@ node --test test/*.test.mjs
 node scripts/gate.mjs
 ```
 
-当前版本 `0.2.0` · 32 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
+当前版本 `0.2.1` · 32 项测试通过（`node --test test/*.test.mjs`）。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python/Pillow；hero 横幅为 1440×576 的中英 × 深浅四版 webp，结构图为 1100×660 手写 SVG 的深浅双版，数值直接读自 quickstart 金标），可重复执行。
 
 Topics：`deepseek-harness`, `dsh`, `dsh-plugin`, `labor`, `contract`, `hr`, `probation`, `compliance`, `perrylink`
 
